@@ -5,9 +5,9 @@ USE SuperSightingsTestDB;
 
 create table supers(
 	id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(30) NOT NULL,
-    description varchar(255),
-    power varchar(30) NOT NULL
+    `name` VARCHAR(30) NOT NULL,
+    `description` varchar(255),
+    `power` varchar(30) NOT NULL
 );
 
 create table organizations(
@@ -29,7 +29,7 @@ create table superOrganizations(
 create table locations(
 	id INT PRIMARY KEY AUTO_INCREMENT,
     locationName varchar(50),
-	description varchar(255),
+	`description` varchar(255),
     address varchar(100),
     latitude INT NOT NULL,
     longitude INT NOT NULL
