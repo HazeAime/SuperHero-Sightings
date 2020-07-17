@@ -3,11 +3,23 @@ CREATE DATABASE SuperSightingsDB;
 
 USE SuperSightingsDB;
 
+create table `powers`(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    `name` varchar(255)
+);
+
 create table supers(
 	id INT PRIMARY KEY AUTO_INCREMENT,
     `name` VARCHAR(30) NOT NULL,
-    `description` varchar(255),
-    `power` varchar(30) NOT NULL
+    `description` varchar(255)
+);
+
+create table superPowers(
+	superId INT NOT NULL,
+    powerId INT NOT NULL,
+    
+    FOREIGN KEY (superId) REFERENCES supers(id),
+    FOREIGN KEY (powerId) REFERENCES powers(id)
 );
 
 create table organizations(

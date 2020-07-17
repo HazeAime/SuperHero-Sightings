@@ -12,6 +12,6 @@ import org.springframework.stereotype.Component;
  * @author siessejordan
  */
 @Component
-public class SightingsDaoDB {
+public class SightingsDaoDB implements SightingsDao{
     
 }
