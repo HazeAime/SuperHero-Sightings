@@ -136,5 +136,33 @@ public class MainController {
         return "allsupers";
     }
     
+    @GetMapping("deletelocation")
+    public String deleteLocation(Location toRemove) {
+        location.delete(toRemove);
+        return "alllocations";
+    }
     
+    @GetMapping("deleteorganization")
+    public String deleteLocation(Organization toRemove) {
+        organization.delete(toRemove);
+        return "allorganizations";
+    }
+    
+    @GetMapping("deletepower")
+    public String deleteLocation(Power toRemove) {
+        power.delete(toRemove);
+        return "allpowers";
+    }
+    
+    @GetMapping("deletesighting")
+    public String deleteLocation(Sighting toRemove) {
+        sighting.delete(toRemove);
+        return "alllocations";
+    }
+    
+    @GetMapping("deletesuper")
+    public String deleteLocation(Super toRemove) {
+        superBeing.delete(toRemove);
+        return "alllocations";
+    }
 }
