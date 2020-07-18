@@ -43,8 +43,8 @@ create table locations(
     locationName varchar(50),
 	`description` varchar(255),
     address varchar(100),
-    latitude INT NOT NULL,
-    longitude INT NOT NULL
+    latitude numeric(7, 5) NOT NULL,
+    longitude numeric(8, 5) NOT NULL
 );
 
 create table sightings(

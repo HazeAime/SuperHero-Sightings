@@ -5,6 +5,11 @@
  */
 package com.sg.supersightings.controllers;
 
+import com.sg.supersightings.models.Location;
+import com.sg.supersightings.models.Organization;
+import com.sg.supersightings.models.Power;
+import com.sg.supersightings.models.Sighting;
+import com.sg.supersightings.models.Super;
 import com.sg.supersightings.repositories.LocationRepository;
 import com.sg.supersightings.repositories.OrganizationRepository;
 import com.sg.supersightings.repositories.PowerRepository;
@@ -16,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  *
@@ -28,7 +34,7 @@ public class MainController {
     LocationRepository location;
     
     @Autowired
-    OrganizationRepository org;
+    OrganizationRepository organization;
     
     @Autowired
     PowerRepository power;
@@ -44,10 +50,91 @@ public class MainController {
         return "home";
     }
     
-    @GetMapping("createnewsuper")
+    @GetMapping("createlocation")
+    public String createNewLocation() {
+        return "createlocation";
+    }
+    
+    @PostMapping("createlocation")
+    public String createNewLocation(Location toAdd){
+        location.save(toAdd);
+        return "alllocations";
+    }
+    
+    @GetMapping("createorganization")
+    public String createNewOrg() {
+        return "createorganization";
+    }
+    
+    @PostMapping("createorganization")
+    public String createNewOrg(Organization toAdd) {
+        organization.save(toAdd);
+        return "allorganizations";
+    }
+    
+    @GetMapping("createpower")
+    public String createNewPower(){
+        return "allpowers";
+    }
+    
+    @PostMapping("createpower")
+    public String createNewPower(Power toAdd) {
+        power.save(toAdd);
+        return "allpowers";
+    }
+    //ManyToOne ?
+    @GetMapping("createsighting")
+    public String createNewSighting() {
+        return "createsighting";
+    }
+    //ManyToOne ?
+    @PostMapping("createsighting")
+    public String createNewSighting(Sighting toAdd) {
+        sighting.save(toAdd);
+        return "allsightings";
+    }
+        
+    @GetMapping("createsuper")
     public String createNewSuper(Model model) {
         model.addAttribute("power", power.findAll());
-        return "createnewuser";
+        return "createsuper";
     }
+    
+    @PostMapping("createsuper")
+    public String createNewSuper(Super toAdd) {
+        superBeing.save(toAdd);
+        return "allsupers";
+    }
+    
+    @GetMapping("alllocations")
+    public String displayAllLocations(Model model) {
+        model.addAttribute("location", location.findAll());
+        return "alllocations";
+    }
+    
+    @GetMapping("allorganizations")
+    public String displayAllOrganizations(Model model) {
+        model.addAttribute("organization", organization.findAll());
+        return "allorganizations";
+    }
+    
+    @GetMapping("allpowers")
+    public String displayAllPowers(Model model) {
+        model.addAttribute("power", power.findAll());
+        return "allpowers";
+    }
+    
+    @GetMapping("allsightings")
+    public String displayAllSightings(Model model) {
+        model.addAttribute("sighting", sighting.findAll());
+        return "allsightings";
+    }
+    
+    @GetMapping("allsupers")
+    public String displayAllSupers(Model model) {
+        model.addAttribute("superBeing", superBeing.findAll());
+        return "allsupers";
+    }
+    
     
 }
