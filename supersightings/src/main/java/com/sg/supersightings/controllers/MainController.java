@@ -124,7 +124,7 @@ public class MainController {
         return "allpowers";
     }
     
-    @GetMapping("allsightings")
+    @GetMapping("/allsightings")
     public String displayAllSightings(Model model) {
         model.addAttribute("sighting", sighting.findAll());
         return "allsightings";

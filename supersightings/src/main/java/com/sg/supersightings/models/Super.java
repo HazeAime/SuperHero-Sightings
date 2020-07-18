@@ -33,11 +33,14 @@ public class Super {
     @Column(nullable = false)
     private String description;
     
-    @Column(nullable = false)
-    private String power;
+    @ManyToMany
+    @JoinTable(name = "superPower",
+            joinColumns = {@JoinColumn(name = "superId")},
+            inverseJoinColumns = {@JoinColumn(name = "powerId")})
+    private List<Power> powers;
 
     @ManyToMany
-    @JoinTable(name = "superOrganizations",
+    @JoinTable(name = "superOrganization",
             joinColumns = {@JoinColumn(name = "superId")},
             inverseJoinColumns = {@JoinColumn(name = "orgId")})
     private List<Organization> allOrganizations;
@@ -48,7 +51,7 @@ public class Super {
         hash = 67 * hash + this.id;
         hash = 67 * hash + Objects.hashCode(this.name);
         hash = 67 * hash + Objects.hashCode(this.description);
-        hash = 67 * hash + Objects.hashCode(this.power);
+        hash = 67 * hash + Objects.hashCode(this.powers);
         return hash;
     }
 
@@ -73,7 +76,7 @@ public class Super {
         if (!Objects.equals(this.description, other.description)) {
             return false;
         }
-        if (!Objects.equals(this.power, other.power)) {
+        if (!Objects.equals(this.powers, other.powers)) {
             return false;
         }
         return true;
@@ -124,14 +127,14 @@ public class Super {
     /**
      * @return the power
      */
-    public String getPower() {
-        return power;
+    public List<Power> getPower() {
+        return powers;
     }
 
     /**
      * @param power the power to set
      */
-    public void setPower(String power) {
-        this.power = power;
+    public void setPowers(List<Power> powers) {
+        this.powers = powers;
     }
 }

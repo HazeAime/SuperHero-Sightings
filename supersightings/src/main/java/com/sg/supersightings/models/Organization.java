@@ -40,7 +40,7 @@ public class Organization {
     private String phone;
     
     @ManyToMany
-    @JoinTable(name = "superOrganizations",
+    @JoinTable(name = "superOrganization",
             joinColumns = {@JoinColumn(name = "orgId")},
             inverseJoinColumns = {@JoinColumn(name = "superId")})
     private List<Super> allSupers;

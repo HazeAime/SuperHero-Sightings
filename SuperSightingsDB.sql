@@ -3,26 +3,26 @@ CREATE DATABASE SuperSightingsDB;
 
 USE SuperSightingsDB;
 
-create table `powers`(
+create table `power` (
 	id INT PRIMARY KEY AUTO_INCREMENT,
     `name` varchar(255)
 );
 
-create table supers(
+create table `super` (
 	id INT PRIMARY KEY AUTO_INCREMENT,
     `name` VARCHAR(30) NOT NULL,
     `description` varchar(255)
 );
 
-create table superPowers(
+create table superPower (
 	superId INT NOT NULL,
     powerId INT NOT NULL,
     
-    FOREIGN KEY (superId) REFERENCES supers(id),
-    FOREIGN KEY (powerId) REFERENCES powers(id)
+    FOREIGN KEY (superId) REFERENCES `super`(id),
+    FOREIGN KEY (powerId) REFERENCES `power`(id)
 );
 
-create table organizations(
+create table `organization` (
 	id INT PRIMARY KEY AUTO_INCREMENT,
     orgName varchar(80),
     orgDescription varchar(255),
@@ -30,15 +30,15 @@ create table organizations(
     phone varchar(20)
 );
 
-create table superOrganizations(
+create table superOrganization (
     superId INT NOT NULL,
     orgId INT NOT NULL,
     
-    FOREIGN KEY (superId) REFERENCES supers(id),
-    FOREIGN KEY (orgId) REFERENCES organizations(id)
+    FOREIGN KEY (superId) REFERENCES `super`(id),
+    FOREIGN KEY (orgId) REFERENCES `organization`(id)
 );
 
-create table locations(
+create table location (
 	id INT PRIMARY KEY AUTO_INCREMENT,
     locationName varchar(50),
 	`description` varchar(255),
@@ -47,12 +47,12 @@ create table locations(
     longitude numeric(8, 5) NOT NULL
 );
 
-create table sightings(
+create table sighting (
 	id INT PRIMARY KEY AUTO_INCREMENT,
     locationId INT NOT NULL,
     superId INT NOT NULL,
     `date` date NOT NULL,
     
-    FOREIGN KEY (locationId) REFERENCES locations(id),
-    FOREIGN KEY (superId) REFERENCES supers(id)
+    FOREIGN KEY (locationId) REFERENCES location(id),
+    FOREIGN KEY (superId) REFERENCES `super`(id)
 );
