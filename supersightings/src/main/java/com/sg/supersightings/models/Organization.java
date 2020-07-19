@@ -48,11 +48,12 @@ public class Organization {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 79 * hash + this.id;
-        hash = 79 * hash + Objects.hashCode(this.orgName);
-        hash = 79 * hash + Objects.hashCode(this.orgDescription);
-        hash = 79 * hash + Objects.hashCode(this.address);
-        hash = 79 * hash + Objects.hashCode(this.phone);
+        hash = 17 * hash + this.id;
+        hash = 17 * hash + Objects.hashCode(this.orgName);
+        hash = 17 * hash + Objects.hashCode(this.orgDescription);
+        hash = 17 * hash + Objects.hashCode(this.address);
+        hash = 17 * hash + Objects.hashCode(this.phone);
+        hash = 17 * hash + Objects.hashCode(this.allSupers);
         return hash;
     }
 
@@ -81,6 +82,9 @@ public class Organization {
             return false;
         }
         if (!Objects.equals(this.phone, other.phone)) {
+            return false;
+        }
+        if (!Objects.equals(this.allSupers, other.allSupers)) {
             return false;
         }
         return true;
@@ -155,5 +159,19 @@ public class Organization {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-  
+
+    /**
+     * @return the allSupers
+     */
+    public List<Super> getAllSupers() {
+        return allSupers;
+    }
+
+    /**
+     * @param allSupers the allSupers to set
+     */
+    public void setAllSupers(List<Super> allSupers) {
+        this.allSupers = allSupers;
+    }
+
 }

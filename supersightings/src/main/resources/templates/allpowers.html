@@ -60,6 +60,31 @@ and open the template in the editor.
                 
             </div>
             
+            <div class="row center">
+                    <div class="col-md-6 border border-dark bg" style="margin: auto">
+                        <h3 class="col text-center" style="color: lightsteelblue">All Powers</h3>
+                    </div>
+                </div> 
+            
+
+
+            <div class="row border border-dark bg" style="height:350px; overflow-y: scroll;">
+                <table class="table col text-center"style="border: solid lightsteelblue;">
+                    <thead class="thead-dark">
+                        <tr style="color: lightsteelblue">
+                            <th>Power ID</th>
+                            <th>Power Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="power : ${allpowers}">
+                            <td th:text="${power.id}" style="color: lightsteelblue"></td>
+                            <td th:text="${power.name}" style="color: lightsteelblue"></td>
+                           
+                        </tr>
+                    </tbody>
+                </table>
+            
         </div>
         
         

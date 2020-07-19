@@ -56,3 +56,49 @@ create table sighting (
     FOREIGN KEY (locationId) REFERENCES location(id),
     FOREIGN KEY (superId) REFERENCES `super`(id)
 );
+
+insert into location(locationName, `description`, address, latitude, longitude) values
+	('The Daily Planet', "A large building in the bustling streets of downtown Metropolis with a large globe on top. Metropolis' number 1 news source.",
+    '1234 Metropolis way', 10.5, 80.1234),
+    
+    ('Wayne Tower', "Wayne Enterprises is large, growing multinational company. The conglomerate is owned and chaired by Bruce Wayne, the son of Thomas and Martha Wayne. 
+    Wayne Enterprises is a green company based out of Gotham City and headquartered in Wayne Tower.", '9876 Wayne Tower Way', 90, 90),
+    
+    ('Bikini Bottom', "An undersea city located in the Pacific Ocean, beneath Bikini Atoll in the Marshall Islands.", '5678 Rock Bottom Heights', 24, 25);
+
+insert into `super`(`name`, `description`) values
+	('Superman', 'Faster than a speeding bullet, the savior from Krypton knows no limits!'),
+    
+    ('Batman', 'The dark knight of Gotham. A Highly skilled martial artist with a genius level IQ, and lots and lots of tactical toys. Not the hero Gotham needs, but the one they deserve.'),
+    
+    ('ManRay', 'Half-man, half...RAYY.');
+    
+insert into `power` (`name`) values
+	('Heat Vision'),
+    ('Super Speed'),
+    ('Lasers'),
+    ('Underwater Breathing'),
+    ('Super Strength'),
+    ('Flight'),
+    ('Invulnerability'),
+    ('Money');
+
+insert into sighting (locationId, superId, `date`) values 
+	(1, 1, '2020-07-04'),
+    (3, 3, '2020-07-10'),
+    (2, 2, '2020-07-16');
+    
+insert into `organization` (orgName, orgDescription, address, phone) values
+	('E.V.I.L.', 'EVERY VILLAIN IS LEMONS', '1000 Bikini Bottom Pass', '(555)999-1000'),
+    
+    ('The Justice League of America', 'A league of crime fighting superheroes. Acting as a strike force and a leading line of 
+    defense, The Justice League remains vigilant in efforts to protect humanity.', '404 Missing Avenue', '(999)404-9999');
+    
+insert into superOrganization () values
+	(3, 1),
+    (1, 2), (2, 2);
+    
+insert into superPower(superId, powerId) values
+	(1, 1), (1, 2), (1, 5), (1, 6), (1, 7),
+    (2, 8),
+    (3, 3), (3, 5);

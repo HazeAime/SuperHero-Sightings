@@ -37,21 +37,22 @@ public class Super {
     @JoinTable(name = "superPower",
             joinColumns = {@JoinColumn(name = "superId")},
             inverseJoinColumns = {@JoinColumn(name = "powerId")})
-    private List<Power> powers;
+    private List<Power> allPowers;
 
     @ManyToMany
     @JoinTable(name = "superOrganization",
             joinColumns = {@JoinColumn(name = "superId")},
             inverseJoinColumns = {@JoinColumn(name = "orgId")})
     private List<Organization> allOrganizations;
-    
+
     @Override
     public int hashCode() {
-        int hash = 5;
+        int hash = 7;
         hash = 67 * hash + this.id;
         hash = 67 * hash + Objects.hashCode(this.name);
         hash = 67 * hash + Objects.hashCode(this.description);
-        hash = 67 * hash + Objects.hashCode(this.powers);
+        hash = 67 * hash + Objects.hashCode(this.allPowers);
+        hash = 67 * hash + Objects.hashCode(this.allOrganizations);
         return hash;
     }
 
@@ -76,7 +77,10 @@ public class Super {
         if (!Objects.equals(this.description, other.description)) {
             return false;
         }
-        if (!Objects.equals(this.powers, other.powers)) {
+        if (!Objects.equals(this.allPowers, other.allPowers)) {
+            return false;
+        }
+        if (!Objects.equals(this.allOrganizations, other.allOrganizations)) {
             return false;
         }
         return true;
@@ -125,16 +129,32 @@ public class Super {
     }
 
     /**
-     * @return the power
+     * @return the allPowers
      */
-    public List<Power> getPower() {
-        return powers;
+    public List<Power> getAllPowers() {
+        return allPowers;
     }
 
     /**
-     * @param power the power to set
+     * @param allPowers the allPowers to set
      */
-    public void setPowers(List<Power> powers) {
-        this.powers = powers;
+    public void setAllPowers(List<Power> allPowers) {
+        this.allPowers = allPowers;
     }
+
+    /**
+     * @return the allOrganizations
+     */
+    public List<Organization> getAllOrganizations() {
+        return allOrganizations;
+    }
+
+    /**
+     * @param allOrganizations the allOrganizations to set
+     */
+    public void setAllOrganizations(List<Organization> allOrganizations) {
+        this.allOrganizations = allOrganizations;
+    }
+    
+    
 }

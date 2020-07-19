@@ -60,6 +60,38 @@ and open the template in the editor.
                 
             </div>
             
+            <div class="row center">
+                    <div class="col-md-6 border border-dark bg" style="margin: auto">
+                        <h3 class="col text-center" style="color: lightsteelblue">All Reported Locations</h3>
+                    </div>
+                </div> 
+            
+
+
+            <div class="row border border-dark bg" style="height:350px; overflow-y: scroll;">
+                <table class="table col text-center"style="border: solid lightsteelblue;">
+                    <thead class="thead-dark">
+                        <tr style="color: lightsteelblue">
+                            <th class="align-middle">Location ID</th>
+                            <th class="align-middle">Name</th>
+                            <th class="align-middle">Description</th>
+                            <th class="align-middle">Address</th>
+                            <th class="align-middle">Latitude</th>
+                            <th class="align-middle">Longitude</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="location : ${alllocations}">
+                            <td th:text="${location.id}" style="color: lightsteelblue"></td>
+                            <td th:text="${location.locationName}" style="color: lightsteelblue"></td>
+                            <td th:text="${location.description}" style="color: lightsteelblue"></td>
+                            <td th:text="${location.address}" style="color: lightsteelblue"></td>
+                            <td th:text="${location.latitude}" style="color: lightsteelblue"></td>
+                            <td th:text="${location.longitude}" style="color: lightsteelblue"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            
         </div>
         
         

@@ -60,6 +60,36 @@ and open the template in the editor.
                 
             </div>
             
+            <div class="row center">
+                    <div class="col-md-6 border border-dark bg" style="margin: auto">
+                        <h3 class="col text-center" style="color: lightsteelblue">All Sightings</h3>
+                    </div>
+                </div> 
+            
+
+
+            <div class="row border border-dark bg" style="height:350px; overflow-y: scroll;">
+                <table class="table col text-center"style="border: solid lightsteelblue;">
+                    <thead class="thead-dark">
+                        <tr style="color: lightsteelblue">
+                            <th class="align-middle">Super ID</th>
+                            <th class="align-middle">Name</th>
+                            <th class="align-middle">Description</th>
+                            <th class="align-middle">Powers</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="superBeing : ${allsupers}">
+                            <td class="align-middle" th:text="${superBeing.id}" style="color: lightsteelblue"></td>
+                            <td class="align-middle" th:text="${superBeing.name}" style="color: lightsteelblue"></td>
+                            <td class="align-middle" th:text="${superBeing.description}" style="color: lightsteelblue"></td>
+                            <td class="align-middle" style="color: lightsteelblue">
+                                <p th:each="power: ${superBeing.allPowers}" th:text="${power.name}"></p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            
         </div>
         
         

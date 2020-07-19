@@ -96,7 +96,7 @@ public class MainController {
         
     @GetMapping("createsuper")
     public String createNewSuper(Model model) {
-        model.addAttribute("power", power.findAll());
+        model.addAttribute("allpowers", power.findAll());
         return "createsuper";
     }
     
@@ -108,31 +108,31 @@ public class MainController {
     
     @GetMapping("alllocations")
     public String displayAllLocations(Model model) {
-        model.addAttribute("location", location.findAll());
+        model.addAttribute("alllocations", location.findAll());
         return "alllocations";
     }
     
     @GetMapping("allorganizations")
     public String displayAllOrganizations(Model model) {
-        model.addAttribute("organization", organization.findAll());
+        model.addAttribute("allorganizations", organization.findAll());
         return "allorganizations";
     }
     
     @GetMapping("allpowers")
     public String displayAllPowers(Model model) {
-        model.addAttribute("power", power.findAll());
+        model.addAttribute("allpowers", power.findAll());
         return "allpowers";
     }
     
-    @GetMapping("/allsightings")
+    @GetMapping("allsightings")
     public String displayAllSightings(Model model) {
-        model.addAttribute("sighting", sighting.findAll());
+        model.addAttribute("allsightings", sighting.findAll());
         return "allsightings";
     }
     
     @GetMapping("allsupers")
     public String displayAllSupers(Model model) {
-        model.addAttribute("superBeing", superBeing.findAll());
+        model.addAttribute("allsupers", superBeing.findAll());
         return "allsupers";
     }
     

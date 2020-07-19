@@ -60,6 +60,40 @@ and open the template in the editor.
                 
             </div>
             
+            <div class="row center">
+                    <div class="col-md-6 border border-dark bg" style="margin: auto">
+                        <h3 class="col text-center" style="color: lightsteelblue">All Organizations</h3>
+                    </div>
+                </div> 
+            
+
+
+            <div class="row border border-dark bg" style="height:350px; overflow-y: scroll;">
+                <table class="table col text-center"style="border: solid lightsteelblue;">
+                    <thead class="thead-dark">
+                        <tr style="color: lightsteelblue">
+                            <th class="align-middle">Organization ID</th>
+                            <th class="align-middle">Organization Name</th>
+                            <th class="align-middle">Description</th>
+                            <th class="align-middle">Address</th>
+                            <th class="align-middle">Phone</th>
+                            <th class="align-middle">Known Members</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="organization : ${allorganizations}">
+                            <td class="align-middle" th:text="${organization.id}" style="color: lightsteelblue"></td>
+                            <td class="align-middle" th:text="${organization.orgName}" style="color: lightsteelblue"></td>
+                            <td class="align-middle" th:text="${organization.orgDescription}" style="color: lightsteelblue"></td>
+                            <td class="align-middle" th:text="${organization.address}" style="color: lightsteelblue"></td>
+                            <td class="align-middle" th:text="${organization.phone}" style="color: lightsteelblue"></td>
+                            <td class="align-middle" style="color: lightsteelblue">
+                                <p th:each="superBeing: ${organization.getAllSupers()}" th:text="${superBeing.name}"></p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            
         </div>
         
         
