@@ -78,6 +78,8 @@ and open the template in the editor.
                             <th class="align-middle">Address</th>
                             <th class="align-middle">Latitude</th>
                             <th class="align-middle">Longitude</th>
+                            <th class="align-middle">Edit Organization</th>
+                            <th class="align-middle">Delete Organization</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -88,12 +90,22 @@ and open the template in the editor.
                             <td th:text="${location.address}" style="color: lightsteelblue"></td>
                             <td th:text="${location.latitude}" style="color: lightsteelblue"></td>
                             <td th:text="${location.longitude}" style="color: lightsteelblue"></td>
+                            <td class="align-middle">
+                                <a class="btn-outline-primary" th:href="${'/updatelocation/' + location.id}">Update</a>
+                            </td>
+                            <td class="align-middle">
+                                <a class="btn-outline-primary" th:href="${'/deletelocation/' + location.id}">Delete</a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             
         </div>
         
+            <br/>
+                <div class="col-md-6" style="margin: auto">
+                    <a href="createlocation" class="btn btn-outline-primary btn-block text-center bg">Create New Location</a>
+                </div>
         
         
         

@@ -5,18 +5,9 @@
  */
 package com.sg.supersightings.controllers;
 
-import com.sg.supersightings.models.Location;
-import com.sg.supersightings.models.Organization;
-import com.sg.supersightings.models.Power;
-import com.sg.supersightings.models.Sighting;
 import com.sg.supersightings.models.Super;
-import com.sg.supersightings.repositories.LocationRepository;
-import com.sg.supersightings.repositories.OrganizationRepository;
 import com.sg.supersightings.repositories.PowerRepository;
-import com.sg.supersightings.repositories.SightingRepository;
 import com.sg.supersightings.repositories.SuperRepository;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,26 +19,36 @@ import org.springframework.web.bind.annotation.PostMapping;
  * @author siessejordan
  */
 @Controller
-public class MainController {
-    
-    @Autowired
-    LocationRepository location;
-    
-    @Autowired
-    OrganizationRepository organization;
-    
-    @Autowired
-    PowerRepository power;
-    
-    @Autowired
-    SightingRepository sighting;
+public class SuperController {
     
     @Autowired
     SuperRepository superBeing;
     
-    @GetMapping("/")
-    public String displayHomepage() {   
-        return "home";
+    @Autowired
+    PowerRepository power;
+    
+    @GetMapping("createsuper")
+    public String createNewSuper(Model model) {
+        model.addAttribute("allpowers", power.findAll());
+        return "createsuper";
+    }
+    
+    @PostMapping("createsuper")
+    public String createNewSuper(Super toAdd) {
+        superBeing.save(toAdd);
+        return "allsupers";
+    }
+    
+    @GetMapping("allsupers")
+    public String displayAllSupers(Model model) {
+        model.addAttribute("allsupers", superBeing.findAll());
+        return "allsupers";
+    }
+    
+    @GetMapping("deletesuper")
+    public String deleteLocation(Super toRemove) {
+        superBeing.delete(toRemove);
+        return "alllocations";
     }
     
 }

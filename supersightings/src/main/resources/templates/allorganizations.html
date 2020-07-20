@@ -78,6 +78,8 @@ and open the template in the editor.
                             <th class="align-middle">Address</th>
                             <th class="align-middle">Phone</th>
                             <th class="align-middle">Known Members</th>
+                            <th class="align-middle">Edit Organization</th>
+                            <th class="align-middle">Delete Organization</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -90,9 +92,22 @@ and open the template in the editor.
                             <td class="align-middle" style="color: lightsteelblue">
                                 <p th:each="superBeing: ${organization.getAllSupers()}" th:text="${superBeing.name}"></p>
                             </td>
+                            <td class="align-middle">
+                                <a class="btn-outline-primary" th:href="${'/updateorganization/' + organization.id}">Update</a>
+                            </td>
+                            <td class="align-middle">
+                                <a class="btn-outline-primary" th:href="${'/deleteorganization/' + organization.id}">Delete</a>
+                            </td>
+                            
+                            
                         </tr>
                     </tbody>
                 </table>
+            </div>
+            <br/>
+                <div class="col-md-6" style="margin: auto">
+                    <a href="createorganization" class="btn btn-outline-primary btn-block text-center bg">Create New Organization</a>
+                </div>
             
         </div>
         
