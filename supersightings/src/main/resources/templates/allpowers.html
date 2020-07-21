@@ -74,12 +74,12 @@ and open the template in the editor.
                         <tr style="color: lightsteelblue">
                             <th>Power ID</th>
                             <th>Power Type</th>
-                            <th class="align-middle">Edit Organization</th>
-                            <th class="align-middle">Delete Organization</th>
+                            <th class="align-middle">Edit Power</th>
+                            <th class="align-middle">Delete Power</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="power : ${allpowers}">
+                        <tr th:each="power : ${allPowers}">
                             <td th:text="${power.id}" style="color: lightsteelblue"></td>
                             <td th:text="${power.name}" style="color: lightsteelblue"></td>
                             <td class="align-middle">

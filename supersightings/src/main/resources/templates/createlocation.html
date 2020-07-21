@@ -66,7 +66,60 @@ and open the template in the editor.
                 </div>
             </div> 
             
+            <div class="row">
+                <div class="col-md-8 border border-dark bg" style="margin: auto; height: 500px;">
+                    <br/>
+                    <br/>
+
+                    <form action="createlocation" method="POST">
+                        <p class="btn btn-outline-danger disabled btn-block text-center bg" th:hidden="${isValid}" th:text="${errorMessage}"></p>
+                        <div class="row">
+                            <label class="col-md-4 text-right" style="color: lightsteelblue;" for="orgName">Location Name: </label>
+                            <input class="col-md-6" name="orgName" placeholder="Organization Name"/>
+                        </div>
+                        <br/>
+
+                        <div class="row">
+                            <label class="col-md-4 text-right" style="color: lightsteelblue;" for="description">Description: </label>
+                            <input class="col-md-6" name="orgDescription" placeholder="Description"/>
+                        </div>
+                        <br/>
+
+                        <div class="row">
+                            <label class="col-md-4 text-right" style="color: lightsteelblue" for="address">Address: </label>
+                            <input class="col-md-6" name="address" placeholder="Address"/>
+                        </div>
+                        <br/>
+
+                        <div class="row">
+                            <label class="col-md-4 text-right" style="color: lightsteelblue" for="phone">Latitude: </label>
+                            <input class="col-md-6" name="latitude" placeholder="Between -90 and 90"/>
+                        </div>
+                        <br/>
+
+                        <div class="row">
+                            <label class="col-md-4 text-right" style="color: lightsteelblue" for="phone">Longitude: </label>
+                            <input class="col-md-6" name="longitude" placeholder="Between -180 and 180"/>
+                        </div>
+                        <br/>
+                        <br/>
+
+                        
+
+                        <div class="row" >
+                            <div class="col-md-6" style="margin: auto">
+                                <input class="btn btn-outline-primary btn-block text-center bg" type="submit" value="Create New Location"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <br/>
+
+
         </div>
+
         
         
         

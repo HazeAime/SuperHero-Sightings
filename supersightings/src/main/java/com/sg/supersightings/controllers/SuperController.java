@@ -6,9 +6,11 @@
 package com.sg.supersightings.controllers;
 
 import com.sg.supersightings.models.Super;
+import com.sg.supersightings.repositories.OrganizationRepository;
 import com.sg.supersightings.repositories.PowerRepository;
 import com.sg.supersightings.repositories.SuperRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,32 +24,42 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class SuperController {
     
     @Autowired
-    SuperRepository superBeing;
+    SuperRepository superBeingRepo;
     
     @Autowired
-    PowerRepository power;
+    PowerRepository powerRepo;
+    
+    @Autowired
+    OrganizationRepository organizationRepo;
     
     @GetMapping("createsuper")
     public String createNewSuper(Model model) {
-        model.addAttribute("allpowers", power.findAll());
+        model.addAttribute("allPowers", powerRepo.findAll());
+        model.addAttribute("allOrganizations", organizationRepo.findAll());
         return "createsuper";
     }
     
     @PostMapping("createsuper")
-    public String createNewSuper(Super toAdd) {
-        superBeing.save(toAdd);
-        return "allsupers";
+    public String createNewSuper(Model model, Super toAdd) {
+        try {
+            superBeingRepo.save(toAdd);
+        } catch (DataIntegrityViolationException ex) {
+            model.addAttribute("isValid", false);
+                model.addAttribute("errorMessage", "Super already exists.");
+                return "createsuper";
+        }
+        return "redirect:/allsupers";
     }
     
     @GetMapping("allsupers")
     public String displayAllSupers(Model model) {
-        model.addAttribute("allsupers", superBeing.findAll());
+        model.addAttribute("allSupers", superBeingRepo.findAll());
         return "allsupers";
     }
     
     @GetMapping("deletesuper")
     public String deleteLocation(Super toRemove) {
-        superBeing.delete(toRemove);
+        superBeingRepo.delete(toRemove);
         return "alllocations";
     }
     

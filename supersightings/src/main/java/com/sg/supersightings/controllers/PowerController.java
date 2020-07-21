@@ -21,28 +21,28 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class PowerController {
     
     @Autowired
-    PowerRepository power;
+    PowerRepository powerRepo;
     
     @GetMapping("createpower")
     public String createNewPower(){
-        return "allpowers";
+        return "createpower";
     }
     
     @PostMapping("createpower")
     public String createNewPower(Power toAdd) {
-        power.save(toAdd);
+        powerRepo.save(toAdd);
         return "allpowers";
     }
     
     @GetMapping("allpowers")
     public String displayAllPowers(Model model) {
-        model.addAttribute("allpowers", power.findAll());
+        model.addAttribute("allPowers", powerRepo.findAll());
         return "allpowers";
     }
     
     @GetMapping("deletepower")
     public String deleteLocation(Power toRemove) {
-        power.delete(toRemove);
+        powerRepo.delete(toRemove);
         return "allpowers";
     }
 }

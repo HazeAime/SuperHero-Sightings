@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class LocationController {
     
      @Autowired
-    LocationRepository location;
+    LocationRepository locationRepo;
      
      @GetMapping("createlocation")
     public String createNewLocation() {
@@ -31,31 +31,31 @@ public class LocationController {
     
     @PostMapping("createlocation")
     public String createNewLocation(Location toAdd){
-        location.save(toAdd);
+        locationRepo.save(toAdd);
         return "alllocations";
     }
     
      @GetMapping("alllocations")
     public String displayAllLocations(Model model) {
-        model.addAttribute("alllocations", location.findAll());
+        model.addAttribute("allLocations", locationRepo.findAll());
         return "alllocations";
     }
     
      @GetMapping("deletelocation")
     public String deleteLocation(Location toRemove) {
-        location.delete(toRemove);
+        locationRepo.delete(toRemove);
         return "alllocations";
     }
     
     @GetMapping("updatelocation/{id}")
     public String updateLocation(Model model, @PathVariable Integer id) {
-        model.addAttribute("location", location.findById(id).orElse(null));
+        model.addAttribute("location", locationRepo.findById(id).orElse(null));
         return "redirect:/locationdetails/{id}";
     }
      
     @PostMapping("updatelocation/{id}")
     public String updateLocations(Location toEdit) {
-        location.save(toEdit);
+        locationRepo.save(toEdit);
         return "redirect:/locationdetails/{id}";
     }
     

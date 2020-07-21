@@ -81,7 +81,7 @@ and open the template in the editor.
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="sighting : ${allsightings}">
+                        <tr th:each="sighting : ${allSightings}">
                             <td th:text="${sighting.id}" style="color: lightsteelblue"></td>
                             <td th:text="${sighting.location.locationName}" style="color: lightsteelblue"></td>
                             <td th:text="${sighting.date}" style="color: lightsteelblue"></td>

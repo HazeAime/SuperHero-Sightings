@@ -67,53 +67,69 @@ and open the template in the editor.
             </div> 
 
             <div class="row">
-                <div class="col-md-8 border border-dark bg" style="margin: auto; height:350px;">
+                <div class="col-md-8 border border-dark bg" style="margin: auto; height:610px;">
                     <br/>
                     <br/>
-                    
+
                     <form action="createorganization" method="POST">
+                        <p class="btn btn-outline-danger disabled btn-block text-center bg" th:hidden="${isValid}" th:text="${errorMessage}"></p>
                         <div class="row">
                             <label class="col-md-4 text-right" style="color: lightsteelblue;" for="orgName">Organization Name: </label>
                             <input class="col-md-6" name="orgName" placeholder="Organization Name"/>
                         </div>
                         <br/>
-                        
+
                         <div class="row">
                             <label class="col-md-4 text-right" style="color: lightsteelblue;" for="description">Description: </label>
                             <input class="col-md-6" name="orgDescription" placeholder="Description"/>
                         </div>
                         <br/>
-                        
+
                         <div class="row">
                             <label class="col-md-4 text-right" style="color: lightsteelblue" for="address">Address: </label>
                             <input class="col-md-6" name="address" placeholder="Address"/>
                         </div>
                         <br/>
-                        
+
                         <div class="row">
                             <label class="col-md-4 text-right" style="color: lightsteelblue" for="phone">Phone: </label>
                             <input class="col-md-6" name="phone" placeholder="Phone Number"/>
                         </div>
                         <br/>
-                        
+
+                        <div style="height:200px; overflow-y: scroll;">
+                            <table class="table col text-center"style="border: solid lightsteelblue;">
+                                <thead class="thead-dark">
+                                    <tr style="color: lightsteelblue">
+                                        <th class="align-middle">Select Members</th>
+                                        <th class="align-middle">Super Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="superBeing : ${allSupers}">
+                                        <td class="align-middle" style="color: lightsteelblue"><input type="checkbox" name="superIds" value="${superBeing.id}"/></td>
+                                        <td class="align-middle" th:text="${superBeing.name}" style="color: lightsteelblue"></td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br/>
+                        <br/>
+
                         <div class="row" >
                             <div class="col-md-6" style="margin: auto">
-                            <input class="btn btn-outline-primary btn-block text-center bg" type="submit" value="Create New Organization"/>
+                                <input class="btn btn-outline-primary btn-block text-center bg" type="submit" value="Create New Organization"/>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
-            
+
             <br/>
-            
+
 
         </div>
-
-
-
-
-
 
 
 

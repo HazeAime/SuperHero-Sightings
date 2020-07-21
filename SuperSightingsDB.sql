@@ -70,8 +70,10 @@ insert into `super`(`name`, `description`) values
 	('Superman', 'Faster than a speeding bullet, the savior from Krypton knows no limits!'),
     
     ('Batman', 'The dark knight of Gotham. A Highly skilled martial artist with a genius level IQ, and lots and lots of tactical toys. Not the hero Gotham needs, but the one they deserve.'),
+        
+    ('ManRay', 'Half-man, half...RAYY.'),
     
-    ('ManRay', 'Half-man, half...RAYY.');
+    ('Iron-Man', 'Half-man, half...IRON.');
     
 insert into `power` (`name`) values
 	('Heat Vision'),

@@ -60,6 +60,46 @@ and open the template in the editor.
                 
             </div>
             
+            <div class="row center">
+                <div class="col-md-6 border border-dark bg" style="margin: auto">
+                    <h3 class="col text-center" style="color: lightsteelblue">Create Power</h3>
+                </div>
+            </div> 
+
+            <div class="row">
+                <div class="col-md-8 border border-dark bg" style="margin: auto; height:350px;">
+                    <br/>
+                    <br/>
+
+                    <form action="createpower" method="POST">
+                        <p class="btn btn-outline-danger disabled btn-block text-center bg" th:hidden="${isValid}" th:text="${errorMessage}"></p>
+                        <br/>
+                        <div class="row">
+                            <label class="col-md-4 text-right" style="color: lightsteelblue;" for="superName">Power Name: </label>
+                            <input class="col-md-6" name="powerName" placeholder="Power Name"/>
+                        </div>
+                        <br/>
+
+                        <p class="btn btn-outline-warning disabled btn-block text-center bg">
+                            Note: Power names should be short, but also descriptive.
+                        </p>
+                        <br/>
+                        <br/>
+                        
+
+                        <div class="row" >
+                            <div class="col-md-6" style="margin: auto">
+                                <input class="btn btn-outline-primary btn-block text-center bg" type="submit" value="Create New Power"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <br/>
+            
+        </div>
+            
         </div>
         
         

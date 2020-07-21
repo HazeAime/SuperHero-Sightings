@@ -31,19 +31,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class MainController {
     
     @Autowired
-    LocationRepository location;
+    LocationRepository locationRepo;
     
     @Autowired
-    OrganizationRepository organization;
+    OrganizationRepository organizationRepo;
     
     @Autowired
-    PowerRepository power;
+    PowerRepository powerRepo;
     
     @Autowired
-    SightingRepository sighting;
+    SightingRepository sightingRepo;
     
     @Autowired
-    SuperRepository superBeing;
+    SuperRepository superBeingRepo;
     
     @GetMapping("/")
     public String displayHomepage() {   
