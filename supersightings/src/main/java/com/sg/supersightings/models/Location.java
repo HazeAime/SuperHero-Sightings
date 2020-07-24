@@ -34,20 +34,20 @@ public class Location {
     private String address;
     
     @Column(nullable = false)
-    private int latitude;
+    private String latitude;
     
     @Column(nullable = false)
-    private int longitude;
+    private String longitude;
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 89 * hash + this.id;
-        hash = 89 * hash + Objects.hashCode(this.locationName);
-        hash = 89 * hash + Objects.hashCode(this.description);
-        hash = 89 * hash + Objects.hashCode(this.address);
-        hash = 89 * hash + this.latitude;
-        hash = 89 * hash + this.longitude;
+        int hash = 5;
+        hash = 59 * hash + this.id;
+        hash = 59 * hash + Objects.hashCode(this.locationName);
+        hash = 59 * hash + Objects.hashCode(this.description);
+        hash = 59 * hash + Objects.hashCode(this.address);
+        hash = 59 * hash + Objects.hashCode(this.latitude);
+        hash = 59 * hash + Objects.hashCode(this.longitude);
         return hash;
     }
 
@@ -66,12 +66,6 @@ public class Location {
         if (this.id != other.id) {
             return false;
         }
-        if (this.latitude != other.latitude) {
-            return false;
-        }
-        if (this.longitude != other.longitude) {
-            return false;
-        }
         if (!Objects.equals(this.locationName, other.locationName)) {
             return false;
         }
@@ -79,6 +73,12 @@ public class Location {
             return false;
         }
         if (!Objects.equals(this.address, other.address)) {
+            return false;
+        }
+        if (!Objects.equals(this.latitude, other.latitude)) {
+            return false;
+        }
+        if (!Objects.equals(this.longitude, other.longitude)) {
             return false;
         }
         return true;
@@ -143,28 +143,31 @@ public class Location {
     /**
      * @return the latitude
      */
-    public int getLatitude() {
+    public String getLatitude() {
         return latitude;
     }
 
     /**
      * @param latitude the latitude to set
      */
-    public void setLatitude(int latitude) {
+    public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
 
     /**
      * @return the longitude
      */
-    public int getLongitude() {
+    public String getLongitude() {
         return longitude;
     }
 
     /**
      * @param longitude the longitude to set
      */
-    public void setLongitude(int longitude) {
+    public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
+
+   
+   
 }

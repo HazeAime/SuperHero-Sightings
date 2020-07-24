@@ -29,38 +29,62 @@ and open the template in the editor.
         
     </head>
     <body>
+        <div th:insert="~{fragments :: header}"></div>
         <div class="container">
-            <div class="row m-4">
-                <div class="col">
-                    <a class="btn btn-outline-primary btn-block bg" style="font-size: 50px; font-weight: bold"
-                       href="/">Super Sightings</a>
+
+            <div class="row center">
+                <div class="col-md-6 border border-dark bg" style="margin: auto">
+                    <h3 class="col text-center" style="color: lightsteelblue">Update Sighting</h3>
                 </div>
             </div>
-            
-            <div class="row m-4 border border-dark bg">
-                <div class="col text-center m-2">
-                    <a href="allsightings" class="btn btn-outline-primary btn-lg">Sightings</a>
+    
+            <div class="row">
+                <div class="col-md-8 border border-dark bg" style="margin: auto; height: 300px;">
+                    <br />
+                    <br />
+    
+                    <form th:action="@{/updatesighting/{id}(id=${sighting.id})}" method="POST">
+                        <p class="btn btn-outline-danger disabled btn-block text-center bg" th:hidden="${isValid}"
+                            th:text="${errorMessage}"></p>
+    
+                        <div class="row">
+                            <label class="col-md-4 text-right" style="color: lightsteelblue;" for="superId">Super Sighted:</label>
+                            <select class="col-md-6" name="superId" id="superSelect">
+                                <option th:each="superBeing : ${allSupers}" th:value="${superBeing.id}"
+                                    th:text="${superBeing.name}"  th:selected="${sighting.superBeing.id == superBeing.id}"></option>
+                            </select>
+                        </div>
+                        <br />
+    
+                        <div class="row">
+                            <label class="col-md-4 text-right" style="color: lightsteelblue;" for="locationId">Location of Sighting:</label>
+                                <select class="col-md-6" name="locationId" id="locationSelect">
+                                    <option th:each="location : ${allLocations}" th:value="${location.id}"
+                                        th:text="${location.locationName}"  th:selected="${sighting.location.id == location.id}"></option>
+                                </select>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <label class="col-md-4 text-right" Style="color: lightsteelblue;" for="date">Date:</label>
+                            <input type="date" class="col-md-6" name="date" th:value="${sighting.date}"/>
+                        </div>
+                        <br />
+    
+                        <div class="row">
+                            <div class="col-md-6" style="margin: auto">
+                                <input class="btn btn-outline-primary btn-block text-center bg" type="submit"
+                                    value="Update Sighting" />
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                
-                <div class="col text-center m-2">
-                    <a href="allsupers" class="btn btn-outline-primary btn-lg">Supers</a>
-                </div>
-                
-                <div class="col text-center m-2">
-                    <a href="allorganizations" class="btn btn-outline-primary btn-lg">Organizations</a>
-                </div>
-                
-                <div class="col text-center m-2">
-                    <a href="allpowers" class="btn btn-outline-primary btn-lg">Powers</a>
-                </div>
-                
-                <div class="col text-center m-2">
-                    <a href="alllocations" class="btn btn-outline-primary btn-lg">Locations</a>
-                </div>
-                
             </div>
-            
+    
+            <br />
+    
+    
         </div>
+    
         
         
         

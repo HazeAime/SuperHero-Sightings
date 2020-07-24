@@ -7,6 +7,7 @@ package com.sg.supersightings.repositories;
 
 import com.sg.supersightings.models.Super;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -16,4 +17,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SuperRepository extends JpaRepository<Super, Integer> {
     
+//    public static final class SuperMapper implements RowMapper<Super> {}
 }

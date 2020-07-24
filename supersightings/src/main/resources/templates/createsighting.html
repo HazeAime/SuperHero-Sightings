@@ -28,45 +28,17 @@ and open the template in the editor.
 </head>
 
 <body>
-    <div class="container">
-        <div class="row m-4">
-            <div class="col">
-                <a class="btn btn-outline-primary btn-block bg" style="font-size: 50px; font-weight: bold"
-                    href="/">Super Sightings</a>
-            </div>
-        </div>
-
-        <div class="row m-4 border border-dark bg">
-            <div class="col text-center m-2">
-                <a href="allsightings" class="btn btn-outline-primary btn-lg">Sightings</a>
-            </div>
-
-            <div class="col text-center m-2">
-                <a href="allsupers" class="btn btn-outline-primary btn-lg">Supers</a>
-            </div>
-
-            <div class="col text-center m-2">
-                <a href="allorganizations" class="btn btn-outline-primary btn-lg">Organizations</a>
-            </div>
-
-            <div class="col text-center m-2">
-                <a href="allpowers" class="btn btn-outline-primary btn-lg">Powers</a>
-            </div>
-
-            <div class="col text-center m-2">
-                <a href="alllocations" class="btn btn-outline-primary btn-lg">Locations</a>
-            </div>
-
-        </div>
+    <div th:insert="~{fragments :: header}"></div>
+        <div class="container">
 
         <div class="row center">
             <div class="col-md-6 border border-dark bg" style="margin: auto">
-                <h3 class="col text-center" style="color: lightsteelblue">Create Location</h3>
+                <h3 class="col text-center" style="color: lightsteelblue">Create a Sighting</h3>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-md-8 border border-dark bg" style="margin: auto; height: 300px;">
+            <div class="col-md-8 border border-dark bg" style="margin: auto; height: 350px;">
                 <br />
                 <br />
 
@@ -89,10 +61,14 @@ and open the template in the editor.
                             <select class="col-md-6" name="locationId" id="locationSelect">
                                 <option value="0">Select a Location</option>
                                 <option th:each="location : ${allLocations}" th:value="${location.id}"
-                                    th:text="${location.locationName}"></option>
+                                    th:text="${location.locationName}"></option> 
                             </select>
                     </div>
                     <br />
+                    <div class="row">
+                        <label class="col-md-4 text-right" Style="color: lightsteelblue;" for="date">Date:</label>
+                        <input type="date" class="col-md-6" name="date" placeholder="MM-dd-yyyy"/>
+                    </div>
                     <br />
 
                     <div class="row">
@@ -109,11 +85,6 @@ and open the template in the editor.
 
 
     </div>
-
-
-
-
-
 
 
 

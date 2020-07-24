@@ -44,6 +44,15 @@ public class Super {
             joinColumns = {@JoinColumn(name = "superId")},
             inverseJoinColumns = {@JoinColumn(name = "orgId")})
     private List<Organization> allOrganizations;
+    
+    public Super(){
+    
+    }
+    
+    public Super(SuperVM vm) {
+        this.name = vm.getName();
+        this.description = vm.getDescription();
+    }
 
     @Override
     public int hashCode() {

@@ -9,7 +9,7 @@ and open the template in the editor.
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
               integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-        <title>Update Location</title>
+        <title>Create Location</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
@@ -29,38 +29,69 @@ and open the template in the editor.
         
     </head>
     <body>
+        <div th:insert="~{fragments :: header}"></div>
         <div class="container">
-            <div class="row m-4">
-                <div class="col">
-                    <a class="btn btn-outline-primary btn-block bg" style="font-size: 50px; font-weight: bold"
-                       href="/">Super Sightings</a>
+            
+            <div class="row center">
+                <div class="col-md-6 border border-dark bg" style="margin: auto">
+                    <h3 class="col text-center" style="color: lightsteelblue">Update Location</h3>
+                </div>
+            </div> 
+            
+            <div class="row">
+                <div class="col-md-8 border border-dark bg" style="margin: auto; height: 500px;">
+                    <br/>
+                    <br/>
+
+                    <form th:action="@{/updatelocation/{id}(id=${location.id})}" method="POST">
+                        <p class="btn btn-outline-danger disabled btn-block text-center bg" th:hidden="${isValid}" th:text="${errorMessage}"></p>
+                        <div class="row">
+                            <label class="col-md-4 text-right" style="color: lightsteelblue;" for="locationName">Location Name: </label>
+                            <input class="col-md-6" name="locationName" placeholder="Location Name" th:value="${location.locationName}"/>
+                        </div>
+                        <br/>
+
+                        <div class="row">
+                            <label class="col-md-4 text-right" style="color: lightsteelblue;" for="description">Description: </label>
+                            <input class="col-md-6" name="description" placeholder="Description" th:value="${location.description}"/>
+                        </div>
+                        <br/>
+
+                        <div class="row">
+                            <label class="col-md-4 text-right" style="color: lightsteelblue" for="address">Address: </label>
+                            <input class="col-md-6" name="address" placeholder="Address" th:value="${location.address}"/>
+                        </div>
+                        <br/>
+
+                        <div class="row">
+                            <label class="col-md-4 text-right" style="color: lightsteelblue" for="latitude">Latitude: </label>
+                            <input class="col-md-6" name="latitude" placeholder="Between -90 and 90" th:value="${location.latitude}"/>
+                        </div>
+                        <br/>
+
+                        <div class="row">
+                            <label class="col-md-4 text-right" style="color: lightsteelblue" for="longitude">Longitude: </label>
+                            <input class="col-md-6" name="longitude" placeholder="Between -180 and 180" th:value="${location.longitude}"/>
+                        </div>
+                        <br/>
+                        <br/>
+
+                        
+
+                        <div class="row" >
+                            <div class="col-md-6" style="margin: auto">
+                                <input class="btn btn-outline-primary btn-block text-center bg" type="submit" value="Update Location"/>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-            
-            <div class="row m-4 border border-dark bg">
-                <div class="col text-center m-2">
-                    <a href="allsightings" class="btn btn-outline-primary btn-lg">Sightings</a>
-                </div>
-                
-                <div class="col text-center m-2">
-                    <a href="allsupers" class="btn btn-outline-primary btn-lg">Supers</a>
-                </div>
-                
-                <div class="col text-center m-2">
-                    <a href="allorganizations" class="btn btn-outline-primary btn-lg">Organizations</a>
-                </div>
-                
-                <div class="col text-center m-2">
-                    <a href="allpowers" class="btn btn-outline-primary btn-lg">Powers</a>
-                </div>
-                
-                <div class="col text-center m-2">
-                    <a href="alllocations" class="btn btn-outline-primary btn-lg">Locations</a>
-                </div>
-                
-            </div>
-            
+
+            <br/>
+
+
         </div>
+
         
         
         

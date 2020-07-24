@@ -29,36 +29,8 @@ and open the template in the editor.
         
     </head>
     <body>
+        <div th:insert="~{fragments :: header}"></div>
         <div class="container">
-            <div class="row m-4">
-                <div class="col">
-                    <a class="btn btn-outline-primary btn-block bg" style="font-size: 50px; font-weight: bold"
-                       href="/">Super Sightings</a>
-                </div>
-            </div>
-            
-            <div class="row m-4 border border-dark bg">
-                <div class="col text-center m-2">
-                    <a href="allsightings" class="btn btn-outline-primary btn-lg">Sightings</a>
-                </div>
-                
-                <div class="col text-center m-2">
-                    <a href="allsupers" class="btn btn-outline-primary btn-lg">Supers</a>
-                </div>
-                
-                <div class="col text-center m-2">
-                    <a href="allorganizations" class="btn btn-outline-primary btn-lg">Organizations</a>
-                </div>
-                
-                <div class="col text-center m-2">
-                    <a href="allpowers" class="btn btn-outline-primary btn-lg">Powers</a>
-                </div>
-                
-                <div class="col text-center m-2">
-                    <a href="alllocations" class="btn btn-outline-primary btn-lg">Locations</a>
-                </div>
-                
-            </div>
             
             <div class="row center">
                 <div class="col-md-6 border border-dark bg" style="margin: auto">
@@ -74,8 +46,8 @@ and open the template in the editor.
                     <form action="createsuper" method="POST">
                         <p class="btn btn-outline-danger disabled btn-block text-center bg" th:hidden="${isValid}" th:text="${errorMessage}"></p>
                         <div class="row">
-                            <label class="col-md-4 text-right" style="color: lightsteelblue;" for="superName">Super Name: </label>
-                            <input class="col-md-6" name="superName" placeholder="Super Name"/>
+                            <label class="col-md-4 text-right" style="color: lightsteelblue;" for="name">Super Name: </label>
+                            <input class="col-md-6" name="name" placeholder="Super Name"/>
                         </div>
                         <br/>
 
@@ -95,7 +67,7 @@ and open the template in the editor.
                                 </thead>
                                 <tbody>
                                     <tr th:each="power : ${allPowers}">
-                                        <td class="align-middle" style="color: lightsteelblue"><input type="checkbox" name="powerIds" value="${power.id}"/></td>
+                                        <td class="align-middle" style="color: lightsteelblue"><input type="checkbox" name="powerIds" th:value="${power.id}"/></td>
                                         <td class="align-middle" th:text="${power.name}" style="color: lightsteelblue"></td>
 
                                     </tr>
@@ -107,7 +79,7 @@ and open the template in the editor.
 
                         <div class="row" >
                             <div class="col-md-6" style="margin: auto">
-                                <input class="btn btn-outline-primary btn-block text-center bg" type="submit" value="Create New Organization"/>
+                                <input class="btn btn-outline-primary btn-block text-center bg" type="submit" value="Create New Super"/>
                             </div>
                         </div>
                     </form>

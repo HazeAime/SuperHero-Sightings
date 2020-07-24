@@ -29,36 +29,8 @@ and open the template in the editor.
 
     </head>
     <body>
+        <div th:insert="~{fragments :: header}"></div>
         <div class="container">
-            <div class="row m-4">
-                <div class="col">
-                    <a class="btn btn-outline-primary btn-block bg" style="font-size: 50px; font-weight: bold"
-                       href="/">Super Sightings</a>
-                </div>
-            </div>
-
-            <div class="row m-4 border border-dark bg">
-                <div class="col text-center m-2">
-                    <a href="allsightings" class="btn btn-outline-primary btn-lg">Sightings</a>
-                </div>
-
-                <div class="col text-center m-2">
-                    <a href="allsupers" class="btn btn-outline-primary btn-lg">Supers</a>
-                </div>
-
-                <div class="col text-center m-2">
-                    <a href="allorganizations" class="btn btn-outline-primary btn-lg">Organizations</a>
-                </div>
-
-                <div class="col text-center m-2">
-                    <a href="allpowers" class="btn btn-outline-primary btn-lg">Powers</a>
-                </div>
-
-                <div class="col text-center m-2">
-                    <a href="alllocations" class="btn btn-outline-primary btn-lg">Locations</a>
-                </div>
-
-            </div>
 
             <div class="row center">
                 <div class="col-md-6 border border-dark bg" style="margin: auto">

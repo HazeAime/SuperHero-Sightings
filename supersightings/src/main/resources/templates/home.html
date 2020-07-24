@@ -29,45 +29,38 @@ and open the template in the editor.
         
     </head>
     <body>
+        <div th:insert="~{fragments :: header}"></div>
         <div class="container">
-            <div class="row m-4">
-                <div class="col">
-                    <a class="btn btn-outline-primary btn-block bg" style="font-size: 50px; font-weight: bold"
-                       href="/">Super Sightings</a>
+            <div class="row center">
+                <div class="col-md-6 border border-dark bg" style="margin: auto">
+                    <h3 class="col text-center" style="color: lightsteelblue">10 Most Recent Sightings</h3>
                 </div>
+            </div> 
+
+
+
+            <div class="row border border-dark bg" style="height:350px; overflow-y: scroll;">
+                <table class="table col text-center"style="border: solid lightsteelblue;">
+                    <thead class="thead-dark">
+                        <tr style="color: lightsteelblue">
+                            <th>Date</th>
+                            <th>Location</th>
+                            <th>Super</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="sighting : ${recentSightings}">
+                            <td th:text="${sighting.date}" style="color: lightsteelblue"></td>
+                            <td th:text="${sighting.location.locationName}" style="color: lightsteelblue"></td>
+                            <td th:text="${sighting.superBeing.name}" style="color: lightsteelblue"></td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            
-            <div class="row m-4 border border-dark bg">
-                <div class="col text-center m-2">
-                    <a href="allsightings" class="btn btn-outline-primary btn-lg">Sightings</a>
-                </div>
-                
-                <div class="col text-center m-2">
-                    <a href="allsupers" class="btn btn-outline-primary btn-lg">Supers</a>
-                </div>
-                
-                <div class="col text-center m-2">
-                    <a href="allorganizations" class="btn btn-outline-primary btn-lg">Organizations</a>
-                </div>
-                
-                <div class="col text-center m-2">
-                    <a href="allpowers" class="btn btn-outline-primary btn-lg">Powers</a>
-                </div>
-                
-                <div class="col text-center m-2">
-                    <a href="alllocations" class="btn btn-outline-primary btn-lg">Locations</a>
-                </div>
-                
-            </div>
+            <br/>
             
         </div>
-        
-        
-        
-        
-        
-        
-        
         
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
                 integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

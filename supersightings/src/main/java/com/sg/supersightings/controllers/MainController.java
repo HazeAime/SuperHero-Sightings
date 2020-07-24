@@ -16,6 +16,7 @@ import com.sg.supersightings.repositories.PowerRepository;
 import com.sg.supersightings.repositories.SightingRepository;
 import com.sg.supersightings.repositories.SuperRepository;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,7 +47,9 @@ public class MainController {
     SuperRepository superBeingRepo;
     
     @GetMapping("/")
-    public String displayHomepage() {   
+    public String displayHomepage(Model model) {   
+        List<Sighting> recentSightings = sightingRepo.getTenMostRecentSightings();
+        model.addAttribute("recentSightings", recentSightings);
         return "home";
     }
     

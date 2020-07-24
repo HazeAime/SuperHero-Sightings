@@ -6,11 +6,93 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+              integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <title>Super Details</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <style>
+
+            .bg {
+                background: rgba(0, 0, 0, .8);
+            }
+
+            body {
+                background: url("https://www.comicbasics.com/wp-content/uploads/2019/12/8-Superheroes-Who-Battled-Cancer.png");
+                background-size: cover;
+                height: 100%;
+            }
+
+        </style>
     </head>
     <body>
-        <div>TODO write content</div>
+        <div th:insert="~{fragments :: header}"></div>
+        
+        <div class="container">
+            <div class="row center">
+                <div class="col-md-6 border border-dark bg" style="margin: auto">
+                    <h3 class="col text-center" style="color: lightsteelblue" th:text="${super.name}">All Supers</h3>
+                </div>
+            </div> 
+
+            <div class="row border border-dark bg" style="height:350px; overflow-y: scroll;">
+                <table class="table col text-center" style="border: solid lightsteelblue;">
+                    <thead class="thead-dark">
+                        <tr style="color: lightsteelblue">
+                            <th class="align-middle">Memberships</th>
+                            <th class="align-middle">Description</th>
+                            <th class="align-middle">Powers</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="align-middle" style="color: lightsteelblue">
+                                <p th:each="org : ${allOrgs}" th:text="${org.orgName}"></p>
+                            </td>
+                            <td class="align-middle" th:text="${super.description}" style="color: lightsteelblue"></td>
+                            <td class="align-middle" style="color: lightsteelblue">
+                                <p th:each="power : ${allPowers}" th:text="${power.name}"></p>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+                <br/>
+            </div>
+
+                <div class="row center">
+                    <div class="col-md-6 border border-dark bg" style="margin: auto">
+                        <h3 class="col text-center" style="color: lightsteelblue">Sightings</h3>
+                    </div>
+                </div> 
+                <div class="row border border-dark bg" style="height: 200px; overflow-y: scroll;">
+                    <table class="table col text-center"style="border: solid lightsteelblue;">
+                        <thead class="thead-dark">
+                            <tr style="color: lightsteelblue">
+                                <th>Sighting Number</th>
+                                <th>Location</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="sighting : ${allSightings}">
+                                <td th:text="${sighting.id}" style="color: lightsteelblue"></td>
+                                <td th:text="${sighting.location.locationName}" style="color: lightsteelblue"></td>
+                                <td th:text="${sighting.date}" style="color: lightsteelblue"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+            <br/>
+            <div class="col-md-6" style="margin: auto">
+                <a href="createsuper" class="btn btn-outline-primary btn-block text-center bg">Create New Super</a>
+            </div>
+
+
+        </div>
     </body>
 </html>

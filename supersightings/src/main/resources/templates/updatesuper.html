@@ -29,36 +29,89 @@ and open the template in the editor.
         
     </head>
     <body>
+        <div th:insert="~{fragments :: header}"></div>
         <div class="container">
-            <div class="row m-4">
-                <div class="col">
-                    <a class="btn btn-outline-primary btn-block bg" style="font-size: 50px; font-weight: bold"
-                       href="/">Super Sightings</a>
-                </div>
-            </div>
             
-            <div class="row m-4 border border-dark bg">
-                <div class="col text-center m-2">
-                    <a href="allsightings" class="btn btn-outline-primary btn-lg">Sightings</a>
+            <div class="row center">
+                <div class="col-md-6 border border-dark bg" style="margin: auto">
+                    <h3 class="col text-center" style="color: lightsteelblue">Update Super</h3>
                 </div>
-                
-                <div class="col text-center m-2">
-                    <a href="allsupers" class="btn btn-outline-primary btn-lg">Supers</a>
+            </div> 
+
+            <div class="row">
+                <div class="col-md-8 border border-dark bg" style="margin: auto; height:600px;">
+
+                    <form action="/updatesuper" method="POST">
+                        <input type="hidden" th:value="${super.id}" name="superId"/>
+                        <p class="btn btn-outline-danger disabled btn-block text-center bg" th:hidden="${isValid}" th:text="${errorMessage}"></p>
+                        <br/>
+                        <div class="row">
+                            <label class="col-md-4 text-right" style="color: lightsteelblue;" for="name">Super Name: </label>
+                            <input class="col-md-6" name="name" th:value="${super.name}"/>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <label class="col-md-4 text-right" style="color: lightsteelblue;" for="description">Description: </label>
+                            <textarea class="col-md-6" style="height: 100px; resize: none;" name="description" th:text="${super.description}"></textarea>
+                        </div>
+                        <br/>
+
+                        <div class="row">
+                            <div class="col-md-6" style="height:200px; overflow-y: scroll;">
+                                <table class="table col text-center"style="border: solid lightsteelblue;">
+                                    <thead class="thead-dark">
+                                        <tr style="color: lightsteelblue">
+                                            <th class="align-middle">Select Abilities</th>
+                                            <th class="align-middle">Power Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="power : ${allPowers}">
+                                            <td class="align-middle" style="color: lightsteelblue"><input th:checked="${power.isChecked}" type="checkbox" name="powerIds" th:value="${power.id}"/></td>
+                                            <td class="align-middle" th:text="${power.name}" style="color: lightsteelblue"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+    
+                            <div class="col-md-6" style="height:200px; overflow-y: scroll;">
+                                <table class="table col text-center"style="border: solid lightsteelblue;">
+                                    <thead class="thead-dark">
+                                        <tr style="color: lightsteelblue">
+                                            <th class="align-middle">Select Organization</th>
+                                            <th class="align-middle">Organization Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="org : ${allOrgs}">
+                                            <td class="align-middle" style="color: lightsteelblue">
+                                                <input th:checked="${org.isChecked}" type="checkbox" name="orgIds" th:value="${org.id}"/>
+                                            </td>
+                                            <td class="align-middle" th:text="${org.orgName}" style="color: lightsteelblue"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <br/>
+
+                        <p class="btn btn-outline-warning disabled btn-block text-center bg">
+                            Note: Supers may Heroes or Villains.
+                        </p>
+                        <br/>
+                        
+
+                        <div class="row" >
+                            <div class="col-md-6" style="margin: auto">
+                                <input class="btn btn-outline-primary btn-block text-center bg" type="submit" value="Update Super"/>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                
-                <div class="col text-center m-2">
-                    <a href="allorganizations" class="btn btn-outline-primary btn-lg">Organizations</a>
-                </div>
-                
-                <div class="col text-center m-2">
-                    <a href="allpowers" class="btn btn-outline-primary btn-lg">Powers</a>
-                </div>
-                
-                <div class="col text-center m-2">
-                    <a href="alllocations" class="btn btn-outline-primary btn-lg">Locations</a>
-                </div>
-                
             </div>
+
+            <br/>
+            
             
         </div>
         

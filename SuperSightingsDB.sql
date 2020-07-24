@@ -5,12 +5,13 @@ USE SuperSightingsDB;
 
 create table `power` (
 	id INT PRIMARY KEY AUTO_INCREMENT,
-    `name` varchar(255)
+    `name` varchar(255) unique
+    
 );
 
 create table `super` (
 	id INT PRIMARY KEY AUTO_INCREMENT,
-    `name` VARCHAR(30) NOT NULL,
+    `name` VARCHAR(30) NOT NULL unique,
     `description` varchar(255)
 );
 
@@ -18,13 +19,13 @@ create table superPower (
 	superId INT NOT NULL,
     powerId INT NOT NULL,
     
-    FOREIGN KEY (superId) REFERENCES `super`(id),
-    FOREIGN KEY (powerId) REFERENCES `power`(id)
+    FOREIGN KEY (superId) REFERENCES `super`(id) ON DELETE CASCADE,
+    FOREIGN KEY (powerId) REFERENCES `power`(id) ON DELETE CASCADE
 );
 
 create table `organization` (
 	id INT PRIMARY KEY AUTO_INCREMENT,
-    orgName varchar(80),
+    orgName varchar(80) unique NOT NULL,
     orgDescription varchar(255),
     address varchar(100),
     phone varchar(20)
@@ -34,13 +35,13 @@ create table superOrganization (
     superId INT NOT NULL,
     orgId INT NOT NULL,
     
-    FOREIGN KEY (superId) REFERENCES `super`(id),
-    FOREIGN KEY (orgId) REFERENCES `organization`(id)
+    FOREIGN KEY (superId) REFERENCES `super`(id) ON DELETE CASCADE,
+    FOREIGN KEY (orgId) REFERENCES `organization`(id) ON DELETE CASCADE
 );
 
 create table location (
 	id INT PRIMARY KEY AUTO_INCREMENT,
-    locationName varchar(50),
+    locationName varchar(50) unique NOT NULL,
 	`description` varchar(255),
     address varchar(100),
     latitude numeric(7, 5) NOT NULL,
@@ -53,8 +54,8 @@ create table sighting (
     superId INT NOT NULL,
     `date` date NOT NULL,
     
-    FOREIGN KEY (locationId) REFERENCES location(id),
-    FOREIGN KEY (superId) REFERENCES `super`(id)
+    FOREIGN KEY (locationId) REFERENCES location(id) on delete cascade,
+    FOREIGN KEY (superId) REFERENCES `super`(id) on delete cascade
 );
 
 insert into location(locationName, `description`, address, latitude, longitude) values

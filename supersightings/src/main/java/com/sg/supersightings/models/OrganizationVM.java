@@ -7,62 +7,30 @@ package com.sg.supersightings.models;
 
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 
 /**
  *
  * @author siessejordan
  */
-@Entity
-public class Organization {
+public class OrganizationVM {
     
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Id
     private int id;
-    
-    @Column(nullable = false)
     private String orgName;
-    
-    @Column(nullable = false)
     private String orgDescription;
-    
-    @Column(nullable = false)
     private String address;
-    
-    @Column(nullable = false)
     private String phone;
-    
-    @ManyToMany
-    @JoinTable(name = "superOrganization",
-            joinColumns = {@JoinColumn(name = "orgId")},
-            inverseJoinColumns = {@JoinColumn(name = "superId")})
-    private List<Super> allSupers;
-    
-    public Organization(OrganizationVM other) {
-        this.orgName = other.getOrgName();
-        this.orgDescription = other.getOrgDescription();
-        this.address = other.getAddress();
-        this.phone = other.getPhone();
-    }
-    
-    public Organization() {}
+    private boolean isChecked;
+    private List<Integer> superIds;
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 17 * hash + this.id;
-        hash = 17 * hash + Objects.hashCode(this.orgName);
-        hash = 17 * hash + Objects.hashCode(this.orgDescription);
-        hash = 17 * hash + Objects.hashCode(this.address);
-        hash = 17 * hash + Objects.hashCode(this.phone);
-        hash = 17 * hash + Objects.hashCode(this.allSupers);
+        int hash = 3;
+        hash = 47 * hash + this.id;
+        hash = 47 * hash + Objects.hashCode(this.orgName);
+        hash = 47 * hash + Objects.hashCode(this.orgDescription);
+        hash = 47 * hash + Objects.hashCode(this.address);
+        hash = 47 * hash + Objects.hashCode(this.phone);
+        hash = 47 * hash + (this.isChecked ? 1 : 0);
         return hash;
     }
 
@@ -77,8 +45,11 @@ public class Organization {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Organization other = (Organization) obj;
+        final OrganizationVM other = (OrganizationVM) obj;
         if (this.id != other.id) {
+            return false;
+        }
+        if (this.isChecked != other.isChecked) {
             return false;
         }
         if (!Objects.equals(this.orgName, other.orgName)) {
@@ -93,10 +64,19 @@ public class Organization {
         if (!Objects.equals(this.phone, other.phone)) {
             return false;
         }
-        if (!Objects.equals(this.allSupers, other.allSupers)) {
-            return false;
-        }
         return true;
+    }
+    
+    public OrganizationVM() {
+    
+    }
+    
+    public OrganizationVM(Organization other) {
+        this.id = other.getId();
+        this.orgName = other.getOrgName();
+        this.address = other.getAddress();
+        this.orgDescription = other.getOrgDescription();
+        this.phone = other.getPhone();
     }
 
     /**
@@ -170,17 +150,31 @@ public class Organization {
     }
 
     /**
-     * @return the allSupers
+     * @return the isChecked
      */
-    public List<Super> getAllSupers() {
-        return allSupers;
+    public boolean isIsChecked() {
+        return isChecked;
     }
 
     /**
-     * @param allSupers the allSupers to set
+     * @param isChecked the isChecked to set
      */
-    public void setAllSupers(List<Super> allSupers) {
-        this.allSupers = allSupers;
+    public void setIsChecked(boolean isChecked) {
+        this.isChecked = isChecked;
+    }
+
+    /**
+     * @return the superIds
+     */
+    public List<Integer> getSuperIds() {
+        return superIds;
+    }
+
+    /**
+     * @param superIds the superIds to set
+     */
+    public void setSuperIds(List<Integer> superIds) {
+        this.superIds = superIds;
     }
 
 }

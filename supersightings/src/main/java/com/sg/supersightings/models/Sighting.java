@@ -15,6 +15,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PastOrPresent;
 
 /**
  *
@@ -36,15 +38,16 @@ public class Sighting {
     private Super superBeing;
     
     @Column(nullable = false)
+    @PastOrPresent(message = "A Sighting date cannot be future dated.")
     private LocalDate date;
-
+    
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 67 * hash + this.id;
-        hash = 67 * hash + Objects.hashCode(this.location);
-        hash = 67 * hash + Objects.hashCode(this.superBeing);
-        hash = 67 * hash + Objects.hashCode(this.date);
+        hash = 43 * hash + this.id;
+        hash = 43 * hash + Objects.hashCode(this.location);
+        hash = 43 * hash + Objects.hashCode(this.superBeing);
+        hash = 43 * hash + Objects.hashCode(this.date);
         return hash;
     }
 
@@ -63,13 +66,13 @@ public class Sighting {
         if (this.id != other.id) {
             return false;
         }
+        if (!Objects.equals(this.date, other.date)) {
+            return false;
+        }
         if (!Objects.equals(this.location, other.location)) {
             return false;
         }
         if (!Objects.equals(this.superBeing, other.superBeing)) {
-            return false;
-        }
-        if (!Objects.equals(this.date, other.date)) {
             return false;
         }
         return true;
