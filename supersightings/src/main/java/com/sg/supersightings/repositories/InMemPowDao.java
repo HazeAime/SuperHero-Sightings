@@ -5,7 +5,7 @@
  */
 package com.sg.supersightings.repositories;
 
-import com.sg.supersightings.models.Location;
+import com.sg.supersightings.models.Power;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,83 +22,67 @@ import org.springframework.stereotype.Component;
  * @author siessejordan
  */
 @Component
-public class InMemLocDao implements LocationRepository {
+public class InMemPowDao implements PowerRepository {
 
-    List<Location> allLocations = new ArrayList();
+    List<Power> allPowers = new ArrayList();
 
-    public InMemLocDao() {
+    public InMemPowDao() {
 
-        Location test = new Location();
+        Power test = new Power();
         test.setId(1);
-        test.setLocationName("Flavor Town");
-        test.setDescription("Your next destination.");
-        test.setAddress("9800 Umami Way");
-        test.setLatitude(new BigDecimal("80.1234"));
-        test.setLongitude(new BigDecimal("60.9876"));
+        test.setName("Flavor Town");
 
-        Location test2 = new Location();
+        Power test2 = new Power();
         test2.setId(2);
-        test2.setLocationName("The Krusty Krab");
-        test2.setDescription("My name is Mr. Krabs and I like money.");
-        test2.setAddress("1000 Rock Bottom Heights");
-        test2.setLatitude(new BigDecimal("-60.0101"));
-        test2.setLongitude(new BigDecimal("-160.2222"));
+        test2.setName("The Krusty Krab");
 
-        Location test3 = new Location();
+        Power test3 = new Power();
         test3.setId(3);
-        test3.setLocationName("Hyrule");
-        test3.setDescription("Your princess is in another castle lol.");
-        test3.setAddress("404 maybe in the hills?");
-        test3.setLatitude(new BigDecimal("30.404"));
-        test3.setLongitude(new BigDecimal("30.202"));
+        test3.setName("Hyrule");
 
-        allLocations.add(test);
-        allLocations.add(test2);
-        allLocations.add(test3);
+        allPowers.add(test);
+        allPowers.add(test2);
+        allPowers.add(test3);
     }
 
     @Override
-    public List<Location> findAll() {
-        return allLocations;
+    public List<Power> findAll() {
+        return allPowers;
     }
 
     @Override
-    public Location getOne(Integer id) {
-        Location toReturn = null;
+    public Power getOne(Integer id) {
+        Power toReturn = null;
 
-        for (Location location : allLocations) {
-            if (location.getId() == id) {
-                toReturn = location;
+        for (Power Power : allPowers) {
+            if (Power.getId() == id) {
+                toReturn = Power;
             }
         }
         return toReturn;
     }
 
     @Override
-    public <S extends Location> S save(S s) {
+    public <S extends Power> S save(S s) {
         boolean isCreate = true;
-        Optional<Location> originalLoc = findById(s.getId());
+        Optional<Power> originalLoc = findById(s.getId());
 
         if (!originalLoc.isEmpty()) {
             isCreate = false;
         }
 
         if (isCreate) {
-            s.setId(allLocations.size() + 1);
-            allLocations.add(s);
+            s.setId(allPowers.size() + 1);
+            allPowers.add(s);
 
         }
 
         if (!isCreate) {
-            Location toEdit = originalLoc.get();
+            Power toEdit = originalLoc.get();
 
 
                 toEdit.setId(s.getId());
-                toEdit.setLocationName(s.getLocationName());
-                toEdit.setDescription(s.getDescription());
-                toEdit.setAddress(s.getAddress());
-                toEdit.setLatitude(s.getLatitude());
-                toEdit.setLongitude(s.getLongitude());
+                toEdit.setName(s.getName());
             
         }
         return s;
@@ -107,8 +91,8 @@ public class InMemLocDao implements LocationRepository {
     }
 
     @Override
-    public Optional<Location> findById(Integer id) {
-        Optional<Location> toReturn = allLocations.stream()
+    public Optional<Power> findById(Integer id) {
+        Optional<Power> toReturn = allPowers.stream()
                 .filter(l -> l.getId() == id)
                 .findAny();
 
@@ -116,15 +100,15 @@ public class InMemLocDao implements LocationRepository {
     }
 
     @Override
-    public void delete(Location t) {
-        if (allLocations.contains(t)) {
-            allLocations.remove(t);
+    public void delete(Power t) {
+        if (allPowers.contains(t)) {
+            allPowers.remove(t);
         }
     }
 
 //    UNUSED METHODS - NEEDED TO COMPLY WITH INTERFACE
     @Override
-    public void deleteAll(Iterable<? extends Location> itrbl) {
+    public void deleteAll(Iterable<? extends Power> itrbl) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -134,37 +118,37 @@ public class InMemLocDao implements LocationRepository {
     }
 
     @Override
-    public <S extends Location> Optional<S> findOne(Example<S> exmpl) {
+    public <S extends Power> Optional<S> findOne(Example<S> exmpl) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public <S extends Location> Page<S> findAll(Example<S> exmpl, Pageable pgbl) {
+    public <S extends Power> Page<S> findAll(Example<S> exmpl, Pageable pgbl) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public <S extends Location> long count(Example<S> exmpl) {
+    public <S extends Power> long count(Example<S> exmpl) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public <S extends Location> boolean exists(Example<S> exmpl) {
+    public <S extends Power> boolean exists(Example<S> exmpl) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Location> findAll(Sort sort) {
+    public List<Power> findAll(Sort sort) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Location> findAllById(Iterable<Integer> itrbl) {
+    public List<Power> findAllById(Iterable<Integer> itrbl) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public <S extends Location> List<S> saveAll(Iterable<S> itrbl) {
+    public <S extends Power> List<S> saveAll(Iterable<S> itrbl) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -174,12 +158,12 @@ public class InMemLocDao implements LocationRepository {
     }
 
     @Override
-    public <S extends Location> S saveAndFlush(S s) {
+    public <S extends Power> S saveAndFlush(S s) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void deleteInBatch(Iterable<Location> itrbl) {
+    public void deleteInBatch(Iterable<Power> itrbl) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -199,17 +183,17 @@ public class InMemLocDao implements LocationRepository {
     }
 
     @Override
-    public <S extends Location> List<S> findAll(Example<S> exmpl) {
+    public <S extends Power> List<S> findAll(Example<S> exmpl) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public <S extends Location> List<S> findAll(Example<S> exmpl, Sort sort) {
+    public <S extends Power> List<S> findAll(Example<S> exmpl, Sort sort) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Page<Location> findAll(Pageable pgbl) {
+    public Page<Power> findAll(Pageable pgbl) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -43,6 +43,14 @@ public class SuperService {
 
     @Autowired
     LocationRepository locationRepo;
+    
+    public SuperService() {
+    
+    }
+    
+    public SuperService(SuperRepository superBeingRepo) {
+        this.superBeingRepo = superBeingRepo;
+    }
 
     public List<Super> findAll() {
         return superBeingRepo.findAll();

@@ -98,12 +98,12 @@ public class LocationServiceTest {
         assertTrue(allLocations.get(0).getLatitude().compareTo(new BigDecimal("80.1234")) == 0);
         assertTrue(allLocations.get(0).getLongitude().compareTo(new BigDecimal("60.9876")) == 0);
         
-        assertTrue(allLocations.get(2).getId() == 4);
-        assertTrue(allLocations.get(2).getLocationName().equals("Luigi's Mansion"));
-        assertTrue(allLocations.get(2).getDescription().equals("It's a spooky house full of ghosts!"));
-        assertTrue(allLocations.get(2).getAddress().equals("2 spoopyforme avenue"));
-        assertTrue(allLocations.get(2).getLatitude().compareTo(new BigDecimal("10.10101")) == 0);
-        assertTrue(allLocations.get(2).getLongitude().compareTo(new BigDecimal("50.6879")) == 0);
+        assertTrue(allLocations.get(3).getId() == 4);
+        assertTrue(allLocations.get(3).getLocationName().equals("Luigi's Mansion"));
+        assertTrue(allLocations.get(3).getDescription().equals("It's a spooky house full of ghosts!"));
+        assertTrue(allLocations.get(3).getAddress().equals("2 spoopyforme avenue"));
+        assertTrue(allLocations.get(3).getLatitude().compareTo(new BigDecimal("10.10101")) == 0);
+        assertTrue(allLocations.get(3).getLongitude().compareTo(new BigDecimal("50.6879")) == 0);
         
     }
 
@@ -129,6 +129,26 @@ public class LocationServiceTest {
      */
     @Test
     public void testDelete() {
+        
+        service.delete(3);
+        
+        List<Location> allLocations = service.findAll();
+        
+        assertTrue(allLocations.size() == 2);
+        
+        assertTrue(allLocations.get(0).getId() == 1);
+        assertTrue(allLocations.get(0).getLocationName().equals("Flavor Town"));
+        assertTrue(allLocations.get(0).getDescription().equals("Your next destination."));
+        assertTrue(allLocations.get(0).getAddress().equals("9800 Umami Way"));
+        assertTrue(allLocations.get(0).getLatitude().compareTo(new BigDecimal("80.1234")) == 0);
+        assertTrue(allLocations.get(0).getLongitude().compareTo(new BigDecimal("60.9876")) == 0);
+        
+        assertTrue(allLocations.get(1).getId() == 2);
+        assertTrue(allLocations.get(1).getLocationName().equals("The Krusty Krab"));
+        assertTrue(allLocations.get(1).getDescription().equals("My name is Mr. Krabs and I like money."));
+        assertTrue(allLocations.get(1).getAddress().equals("1000 Rock Bottom Heights"));
+        assertTrue(allLocations.get(1).getLatitude().compareTo(new BigDecimal("-60.0101")) == 0);
+        assertTrue(allLocations.get(1).getLongitude().compareTo(new BigDecimal("-160.2222")) == 0);
     }
 
     /**
@@ -136,6 +156,29 @@ public class LocationServiceTest {
      */
     @Test
     public void testUpdateLocation() throws Exception {
+        
+        Location toEdit = new Location();
+        toEdit.setId(2);
+        toEdit.setLocationName("Jimmy Johns");
+        toEdit.setDescription("Your princess is in another castle lol.");
+        toEdit.setAddress("404 maybe in the hills?");
+        toEdit.setLatitude(new BigDecimal("30.404"));
+        toEdit.setLongitude(new BigDecimal("30.202"));
+        
+        service.saveNewLocation(toEdit);
+        
+        List<Location> allLocations = service.findAll();
+        
+        assertTrue(allLocations.size() == 3);
+        
+        assertTrue(allLocations.get(1).getId() == 2);
+        assertTrue(allLocations.get(1).getLocationName().equals("Jimmy Johns"));
+        assertTrue(allLocations.get(1).getDescription().equals("Your princess is in another castle lol."));
+        assertTrue(allLocations.get(1).getAddress().equals("404 maybe in the hills?"));
+        assertTrue(allLocations.get(1).getLatitude().compareTo(new BigDecimal("30.404")) == 0);
+        assertTrue(allLocations.get(1).getLongitude().compareTo(new BigDecimal("30.202")) == 0);
+        
+        
     }
     
 }
