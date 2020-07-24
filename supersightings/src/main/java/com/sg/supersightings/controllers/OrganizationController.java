@@ -5,6 +5,7 @@
  */
 package com.sg.supersightings.controllers;
 
+import com.sg.supersightings.exceptions.InvalidEntityException;
 import com.sg.supersightings.models.Organization;
 import com.sg.supersightings.models.OrganizationVM;
 import com.sg.supersightings.models.Power;
@@ -13,6 +14,8 @@ import com.sg.supersightings.models.Super;
 import com.sg.supersightings.models.SuperVM;
 import com.sg.supersightings.repositories.OrganizationRepository;
 import com.sg.supersightings.repositories.SuperRepository;
+import com.sg.supersightings.services.OrganizationService;
+import com.sg.supersightings.services.SuperService;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,112 +34,75 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class OrganizationController {
 
     @Autowired
-    OrganizationRepository organizationRepo;
+    SuperService superService;
 
     @Autowired
-    SuperRepository superBeingRepo;
+    OrganizationService orgService;
 
     @GetMapping("/createorganization")
     public String createNewOrg(Model model) {
-        model.addAttribute("allSupers", superBeingRepo.findAll());
+        model.addAttribute("allSupers", superService.findAll());
         model.addAttribute("isValid", true);
         return "createorganization";
     }
 
     @PostMapping("/createorganization")
     public String createNewOrg(Model model, OrganizationVM vm) {
-        model.addAttribute("allSupers", superBeingRepo.findAll());
-        
-        Organization toAdd = new Organization(vm);
-        List<Super> orgSupers = new ArrayList<>();
-        for(Integer superId : vm.getSuperIds()) {
-            orgSupers.add(superBeingRepo.getOne(superId));
-        }
-        toAdd.setAllSupers(orgSupers);
-        
-        if (toAdd.getOrgName().isEmpty()) {
-            model.addAttribute("isValid", false);
-            model.addAttribute("errorMessage", "An Organization must have a name.");
-            return "createorganization";
-        }
-        
+        model.addAttribute("allSupers", superService.findAll());
         try {
-            organizationRepo.save(toAdd);
+            orgService.saveNewOrg(vm);
         } catch (DataIntegrityViolationException ex) {
             model.addAttribute("isValid", false);
-                model.addAttribute("errorMessage", "Organization already exists.");
-                return "createorganization";
+            model.addAttribute("errorMessage", "Organization already exists.");
+            return "createorganization";
+        } catch (InvalidEntityException ex) {
+            model.addAttribute("isValid", false);
+            model.addAttribute("errorMessage", ex.getMessage());
+            return "createorganization";
         }
         return "redirect:/allorganizations";
     }
-    
+
     @GetMapping("/updateorganization/{id}")
     public String updateOrganization(Model model, @PathVariable Integer id) {
-        Organization org = organizationRepo.getOne(id);
+        Organization org = orgService.getOne(id);
         model.addAttribute("org", org);
-        model.addAttribute("allSupers", getAllSuperVMsForOrg(org));
+        model.addAttribute("allSupers", orgService.getAllSuperVMsForOrg(org));
         model.addAttribute("isValid", true);
         return "/updateorganization";
     }
-    
+
     @PostMapping("/updateorganization/{id}")
     public String updateOrganization(Model model, OrganizationVM vm, @PathVariable Integer id) {
-        Organization org = organizationRepo.getOne(id);
+        Organization org = orgService.getOne(id);
         model.addAttribute("org", org);
-        model.addAttribute("allSupers", getAllSuperVMsForOrg(org));
-        
-        if (vm.getOrgName().isEmpty()) {
-                model.addAttribute("isValid", false);
-                model.addAttribute("errorMessage", "An Organization must have a name.");
-                return "updateorganization";
-            }
-        org.setOrgName(vm.getOrgName());
-        org.setOrgDescription(vm.getOrgDescription());
-        org.setAddress(vm.getAddress());
-        org.setPhone(vm.getPhone());
-        
-        List<Super> orgSupers = new ArrayList();
-        for(Integer superId : vm.getSuperIds()) {
-            orgSupers.add(superBeingRepo.getOne(superId));
-        }
-        org.setAllSupers(orgSupers);
+        model.addAttribute("allSupers", orgService.getAllSuperVMsForOrg(org));
+
         try {
-            organizationRepo.save(org);
+            orgService.updateOrg(org, vm);
         } catch (DataIntegrityViolationException ex) {
             model.addAttribute("isValid", false);
             model.addAttribute("errorMessage", "Organization already exists.");
             return "updateorganization";
+        } catch (InvalidEntityException ex) {
+            model.addAttribute("isValid", false);
+            model.addAttribute("errorMessage", ex.getMessage());
+            return "updateorganization";
         }
-        
+
         return "redirect:/allorganizations";
     }
 
     @GetMapping("/allorganizations")
     public String displayAllOrganizations(Model model) {
-        model.addAttribute("allOrganizations", organizationRepo.findAll());
+        model.addAttribute("allOrganizations", orgService.findAll());
         return "allorganizations";
     }
 
     @GetMapping("/deleteorganization/{id}")
     public String deleteOrganization(@PathVariable Integer id) {
-        Organization toDelete = organizationRepo.getOne(id);
-        organizationRepo.delete(toDelete);
+        orgService.delete(id);
         return "redirect:/allorganizations";
-    }
-
-    private Object getAllSuperVMsForOrg(Organization org) {
-        List<Super> allSupers = superBeingRepo.findAll();
-        List<SuperVM> toReturn = new ArrayList<>();
-        
-        for(Super superBeing : allSupers) {
-            SuperVM vm = new SuperVM(superBeing);
-            if (org.getAllSupers().contains(superBeing)) {
-                vm.setIsChecked(true);
-            }
-            toReturn.add(vm);
-        }
-        
-        return toReturn;
     }
 
 }

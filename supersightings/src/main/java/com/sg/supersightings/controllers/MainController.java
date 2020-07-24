@@ -15,6 +15,7 @@ import com.sg.supersightings.repositories.OrganizationRepository;
 import com.sg.supersightings.repositories.PowerRepository;
 import com.sg.supersightings.repositories.SightingRepository;
 import com.sg.supersightings.repositories.SuperRepository;
+import com.sg.supersightings.services.SightingService;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -30,25 +31,13 @@ import org.springframework.web.bind.annotation.PostMapping;
  */
 @Controller
 public class MainController {
-    
+
     @Autowired
-    LocationRepository locationRepo;
-    
-    @Autowired
-    OrganizationRepository organizationRepo;
-    
-    @Autowired
-    PowerRepository powerRepo;
-    
-    @Autowired
-    SightingRepository sightingRepo;
-    
-    @Autowired
-    SuperRepository superBeingRepo;
+    SightingService sightingService;
     
     @GetMapping("/")
     public String displayHomepage(Model model) {   
-        List<Sighting> recentSightings = sightingRepo.getTenMostRecentSightings();
+        List<Sighting> recentSightings = sightingService.getTenMostRecentSightings();
         model.addAttribute("recentSightings", recentSightings);
         return "home";
     }
