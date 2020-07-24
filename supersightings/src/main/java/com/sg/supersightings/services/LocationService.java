@@ -22,12 +22,20 @@ public class LocationService {
 
     @Autowired
     LocationRepository locationRepo;
+    
+    public LocationService() {
+    
+    }
+    
+    public LocationService(LocationRepository locationRepo) {
+        this.locationRepo = locationRepo;
+    }
 
     public List<Location> findAll() {
         return locationRepo.findAll();
     }
 
-    public void saveNewLocation(Location toAdd) throws InvalidEntityException {
+    public void saveNewLocation(Location toAdd) throws InvalidEntityException {//*****
         validateLocation(toAdd);
         locationRepo.save(toAdd);
     }
@@ -40,7 +48,7 @@ public class LocationService {
         locationRepo.delete(locationRepo.getOne(id));
     }
 
-    public void updateLocation(Location toEdit) throws InvalidEntityException {
+    public void updateLocation(Location toEdit) throws InvalidEntityException {//*****
         validateLocation(toEdit);
         locationRepo.save(toEdit);
     }
@@ -49,19 +57,17 @@ public class LocationService {
         if (location.getLocationName().isEmpty()) {
             throw new InvalidEntityException("Location Name must not be blank.");
         }
-        if (location.getLatitude().isEmpty()) {
+        if (location.getLatitude() == null) {
             throw new InvalidEntityException("Location Latitude must not be blank.");
         }
-        if (location.getLongitude().isEmpty()) {
+        if (location.getLongitude() == null) {
             throw new InvalidEntityException("Location Longitude must not be blank.");
         }
-        BigDecimal latitude = new BigDecimal(location.getLatitude());
-        BigDecimal longitude = new BigDecimal(location.getLongitude());
 
-        if (latitude.compareTo(new BigDecimal("-90")) == -1 || latitude.compareTo(new BigDecimal("90")) == 1) {
+        if (location.getLatitude().compareTo(new BigDecimal("-90")) < 0 || location.getLatitude().compareTo(new BigDecimal("90")) > 0) {
             throw new InvalidEntityException("Latitude must be between -90 and 90.");
         }
-        if (longitude.compareTo(new BigDecimal("-180")) == -1 || longitude.compareTo(new BigDecimal("180")) == 1) {
+        if (location.getLongitude().compareTo(new BigDecimal("-180")) < 0 || location.getLongitude().compareTo(new BigDecimal("180")) > 0) {
             throw new InvalidEntityException("Longitude must be between -180 and 180.");
         }
     }

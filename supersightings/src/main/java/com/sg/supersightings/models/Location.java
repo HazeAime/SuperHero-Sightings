@@ -5,6 +5,7 @@
  */
 package com.sg.supersightings.models;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,20 +35,20 @@ public class Location {
     private String address;
     
     @Column(nullable = false)
-    private String latitude;
+    private BigDecimal latitude;
     
     @Column(nullable = false)
-    private String longitude;
+    private BigDecimal longitude;
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 59 * hash + this.id;
-        hash = 59 * hash + Objects.hashCode(this.locationName);
-        hash = 59 * hash + Objects.hashCode(this.description);
-        hash = 59 * hash + Objects.hashCode(this.address);
-        hash = 59 * hash + Objects.hashCode(this.latitude);
-        hash = 59 * hash + Objects.hashCode(this.longitude);
+        int hash = 7;
+        hash = 43 * hash + this.id;
+        hash = 43 * hash + Objects.hashCode(this.locationName);
+        hash = 43 * hash + Objects.hashCode(this.description);
+        hash = 43 * hash + Objects.hashCode(this.address);
+        hash = 43 * hash + Objects.hashCode(this.latitude);
+        hash = 43 * hash + Objects.hashCode(this.longitude);
         return hash;
     }
 
@@ -143,31 +144,31 @@ public class Location {
     /**
      * @return the latitude
      */
-    public String getLatitude() {
+    public BigDecimal getLatitude() {
         return latitude;
     }
 
     /**
      * @param latitude the latitude to set
      */
-    public void setLatitude(String latitude) {
+    public void setLatitude(BigDecimal latitude) {
         this.latitude = latitude;
     }
 
     /**
      * @return the longitude
      */
-    public String getLongitude() {
+    public BigDecimal getLongitude() {
         return longitude;
     }
 
     /**
      * @param longitude the longitude to set
      */
-    public void setLongitude(String longitude) {
+    public void setLongitude(BigDecimal longitude) {
         this.longitude = longitude;
     }
 
-   
+    
    
 }
