@@ -12,11 +12,11 @@ import com.sg.supersightings.repositories.InMemSightDao;
 import com.sg.supersightings.repositories.InMemSupDao;
 import java.time.LocalDate;
 import java.util.List;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import static org.junit.Assert.*;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -32,20 +32,20 @@ public class SightingServiceTest {
     public SightingServiceTest() {
     }
 
-    @BeforeClass
+    @BeforeAll
     public static void setUpClass() {
     }
 
-    @AfterClass
+    @AfterAll
     public static void tearDownClass() {
     }
 
-    @Before
+    @BeforeEach
     public void setUp() {
         service = new SightingService(new InMemSightDao(), new InMemSupDao(), new InMemLocDao());
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
     }
 
@@ -105,7 +105,7 @@ public class SightingServiceTest {
         assertTrue(toTest.getId() == expectedId);
         assertTrue(toTest.getDate().equals(LocalDate.parse("2020-01-04")));
         assertTrue(toTest.getSuperBeing().getName().equals("Star Platinum"));
-        assertTrue(toTest.getLocation().getLocationName().equals("Flavor Town"));
+        assertTrue(toTest.getLocation().getLocationName().equals("New York"));
 
     }
 

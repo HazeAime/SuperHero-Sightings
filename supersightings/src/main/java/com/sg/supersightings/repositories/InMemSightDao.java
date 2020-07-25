@@ -22,6 +22,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
+import static java.util.Comparator.comparing;
+
 /**
  *
  * @author siessejordan
@@ -44,8 +46,8 @@ public class InMemSightDao implements SightingRepository {
         superTwo.setId(2);
         superTwo.setName("Joseph Joestar");
         Location locationTwo = new Location();
-        locationOne.setId(2);
-        locationOne.setLocationName("New York");
+        locationTwo.setId(2);
+        locationTwo.setLocationName("New York");
 
         Sighting test = new Sighting();
         test.setId(1);
@@ -66,62 +68,72 @@ public class InMemSightDao implements SightingRepository {
         test3.setLocation(locationTwo);
 
         Sighting test4 = new Sighting();
-        test3.setId(4);
-        test3.setDate(LocalDate.parse("2020-01-04"));
-        test3.setSuperBeing(superOne);
-        test3.setLocation(locationTwo);
+        test4.setId(4);
+        test4.setDate(LocalDate.parse("2020-01-04"));
+        test4.setSuperBeing(superOne);
+        test4.setLocation(locationTwo);
 
         Sighting test5 = new Sighting();
-        test3.setId(5);
-        test3.setDate(LocalDate.parse("2020-01-05"));
-        test3.setSuperBeing(superOne);
-        test3.setLocation(locationTwo);
+        test5.setId(5);
+        test5.setDate(LocalDate.parse("2020-01-05"));
+        test5.setSuperBeing(superOne);
+        test5.setLocation(locationTwo);
 
         Sighting test6 = new Sighting();
-        test3.setId(6);
-        test3.setDate(LocalDate.parse("2020-01-06"));
-        test3.setSuperBeing(superOne);
-        test3.setLocation(locationTwo);
+        test6.setId(6);
+        test6.setDate(LocalDate.parse("2020-01-06"));
+        test6.setSuperBeing(superOne);
+        test6.setLocation(locationTwo);
 
         Sighting test7 = new Sighting();
-        test3.setId(7);
-        test3.setDate(LocalDate.parse("2020-01-07"));
-        test3.setSuperBeing(superOne);
-        test3.setLocation(locationTwo);
+        test7.setId(7);
+        test7.setDate(LocalDate.parse("2020-01-07"));
+        test7.setSuperBeing(superOne);
+        test7.setLocation(locationTwo);
 
         Sighting test8 = new Sighting();
-        test3.setId(8);
-        test3.setDate(LocalDate.parse("2020-01-08"));
-        test3.setSuperBeing(superOne);
-        test3.setLocation(locationTwo);
+        test8.setId(8);
+        test8.setDate(LocalDate.parse("2020-01-08"));
+        test8.setSuperBeing(superOne);
+        test8.setLocation(locationTwo);
 
         Sighting test9 = new Sighting();
-        test3.setId(9);
-        test3.setDate(LocalDate.parse("2020-01-09"));
-        test3.setSuperBeing(superOne);
-        test3.setLocation(locationTwo);
+        test9.setId(9);
+        test9.setDate(LocalDate.parse("2020-01-09"));
+        test9.setSuperBeing(superOne);
+        test9.setLocation(locationTwo);
 
         Sighting test10 = new Sighting();
-        test3.setId(10);
-        test3.setDate(LocalDate.parse("2020-01-10"));
-        test3.setSuperBeing(superOne);
-        test3.setLocation(locationTwo);
+        test10.setId(10);
+        test10.setDate(LocalDate.parse("2020-01-10"));
+        test10.setSuperBeing(superOne);
+        test10.setLocation(locationTwo);
 
         Sighting test11 = new Sighting();
-        test3.setId(11);
-        test3.setDate(LocalDate.parse("2020-01-11"));
-        test3.setSuperBeing(superOne);
-        test3.setLocation(locationTwo);
+        test11.setId(11);
+        test11.setDate(LocalDate.parse("2020-01-11"));
+        test11.setSuperBeing(superOne);
+        test11.setLocation(locationTwo);
 
         Sighting test12 = new Sighting();
-        test3.setId(12);
-        test3.setDate(LocalDate.parse("2020-01-12"));
-        test3.setSuperBeing(superOne);
-        test3.setLocation(locationTwo);
+        test12.setId(12);
+        test12.setDate(LocalDate.parse("2020-01-12"));
+        test12.setSuperBeing(superOne);
+        test12.setLocation(locationTwo);
 
         allSightings.add(test);
         allSightings.add(test2);
         allSightings.add(test3);
+        allSightings.add(test4);
+        allSightings.add(test5);
+        allSightings.add(test6);
+        allSightings.add(test7);
+        allSightings.add(test8);
+        allSightings.add(test9);
+        allSightings.add(test10);
+        allSightings.add(test11);
+        allSightings.add(test12);
+
     }
 
     @Override
@@ -188,11 +200,19 @@ public class InMemSightDao implements SightingRepository {
 
     @Override
     public List<Sighting> getTenMostRecentSightings() {
-        List<Sighting> toReturn = new ArrayList(); // Make empty list
+        List<Sighting> toSort = new ArrayList(); // Make empty list
 
-        Collections.copy(toReturn, allSightings); // Copy values from allSightings into toReturn
+        for(int i = 0; i < allSightings.size(); i++){
+            toSort.add(allSightings.get(i));
+        }
 
-        Collections.sort(toReturn, (Sighting s1, Sighting s2) -> s1.getDate().compareTo(s2.getDate())); // Sort toReturn
+        toSort.sort(comparing(sighting -> sighting.getDate()));// Sort toReturn ASC data
+
+        List<Sighting> toReturn = new ArrayList();
+
+        for(int i = toSort.size() - 1; i > -1; i--){
+            toReturn.add(toSort.get(i));
+        }
 
         Integer maxIndex = toReturn.size() - 1;
         
