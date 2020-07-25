@@ -21,7 +21,13 @@ public class PowerService {
 
     @Autowired
     PowerRepository powerRepo;
+    
+    public PowerService() {}
 
+    public PowerService(PowerRepository powerRepo) {
+        this.powerRepo = powerRepo;
+    }
+    
     public void saveNewPower(Power power) throws InvalidEntityException {
         validatePower(power);
         powerRepo.save(power);

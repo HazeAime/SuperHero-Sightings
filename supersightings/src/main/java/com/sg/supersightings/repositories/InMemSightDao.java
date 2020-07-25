@@ -5,9 +5,14 @@
  */
 package com.sg.supersightings.repositories;
 
+import com.sg.supersightings.models.Location;
 import com.sg.supersightings.models.Sighting;
+import com.sg.supersightings.models.Super;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -28,14 +33,91 @@ public class InMemSightDao implements SightingRepository {
 
     public InMemSightDao() {
 
+        Super superOne = new Super();
+        superOne.setId(1);
+        superOne.setName("Star Platinum");
+        Location locationOne = new Location();
+        locationOne.setId(1);
+        locationOne.setLocationName("Chicago");
+
+        Super superTwo = new Super();
+        superTwo.setId(2);
+        superTwo.setName("Joseph Joestar");
+        Location locationTwo = new Location();
+        locationOne.setId(2);
+        locationOne.setLocationName("New York");
+
         Sighting test = new Sighting();
         test.setId(1);
+        test.setDate(LocalDate.parse("2020-01-01"));
+        test.setSuperBeing(superOne);
+        test.setLocation(locationOne);
 
         Sighting test2 = new Sighting();
         test2.setId(2);
+        test2.setDate(LocalDate.parse("2020-01-02"));
+        test2.setSuperBeing(superTwo);
+        test2.setLocation(locationTwo);
 
         Sighting test3 = new Sighting();
         test3.setId(3);
+        test3.setDate(LocalDate.parse("2020-01-03"));
+        test3.setSuperBeing(superOne);
+        test3.setLocation(locationTwo);
+
+        Sighting test4 = new Sighting();
+        test3.setId(4);
+        test3.setDate(LocalDate.parse("2020-01-04"));
+        test3.setSuperBeing(superOne);
+        test3.setLocation(locationTwo);
+
+        Sighting test5 = new Sighting();
+        test3.setId(5);
+        test3.setDate(LocalDate.parse("2020-01-05"));
+        test3.setSuperBeing(superOne);
+        test3.setLocation(locationTwo);
+
+        Sighting test6 = new Sighting();
+        test3.setId(6);
+        test3.setDate(LocalDate.parse("2020-01-06"));
+        test3.setSuperBeing(superOne);
+        test3.setLocation(locationTwo);
+
+        Sighting test7 = new Sighting();
+        test3.setId(7);
+        test3.setDate(LocalDate.parse("2020-01-07"));
+        test3.setSuperBeing(superOne);
+        test3.setLocation(locationTwo);
+
+        Sighting test8 = new Sighting();
+        test3.setId(8);
+        test3.setDate(LocalDate.parse("2020-01-08"));
+        test3.setSuperBeing(superOne);
+        test3.setLocation(locationTwo);
+
+        Sighting test9 = new Sighting();
+        test3.setId(9);
+        test3.setDate(LocalDate.parse("2020-01-09"));
+        test3.setSuperBeing(superOne);
+        test3.setLocation(locationTwo);
+
+        Sighting test10 = new Sighting();
+        test3.setId(10);
+        test3.setDate(LocalDate.parse("2020-01-10"));
+        test3.setSuperBeing(superOne);
+        test3.setLocation(locationTwo);
+
+        Sighting test11 = new Sighting();
+        test3.setId(11);
+        test3.setDate(LocalDate.parse("2020-01-11"));
+        test3.setSuperBeing(superOne);
+        test3.setLocation(locationTwo);
+
+        Sighting test12 = new Sighting();
+        test3.setId(12);
+        test3.setDate(LocalDate.parse("2020-01-12"));
+        test3.setSuperBeing(superOne);
+        test3.setLocation(locationTwo);
 
         allSightings.add(test);
         allSightings.add(test2);
@@ -106,13 +188,24 @@ public class InMemSightDao implements SightingRepository {
 
     @Override
     public List<Sighting> getTenMostRecentSightings() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Sighting> toReturn = new ArrayList(); // Make empty list
+
+        Collections.copy(toReturn, allSightings); // Copy values from allSightings into toReturn
+
+        Collections.sort(toReturn, (Sighting s1, Sighting s2) -> s1.getDate().compareTo(s2.getDate())); // Sort toReturn
+
+        Integer maxIndex = toReturn.size() - 1;
+        
+        if(maxIndex > 10){
+            maxIndex = 10;
+        }
+        
+        return toReturn.subList(0, maxIndex);
     }
-    
-    
+
     @Override
     public List<Sighting> getAllSightingsForSuperId(int superId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return allSightings.stream().filter(s -> s.getSuperBeing().getId() == superId).collect(Collectors.toList());
     }
 
 //    UNUSED METHODS - NEEDED TO COMPLY WITH INTERFACE

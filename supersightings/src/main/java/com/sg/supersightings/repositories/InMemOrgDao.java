@@ -6,6 +6,8 @@
 package com.sg.supersightings.repositories;
 
 import com.sg.supersightings.models.Organization;
+import com.sg.supersightings.models.Power;
+import com.sg.supersightings.models.Super;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,21 +32,57 @@ public class InMemOrgDao implements OrganizationRepository {
 
         Organization test = new Organization();
         test.setId(1);
-        test.setOrgName("Flavor Town");
-        test.setOrgDescription("Your next destination.");
-        test.setAddress("9800 Umami Way");
+        test.setOrgName("E.V.I.L.");
+        test.setOrgDescription("evil");
+        test.setAddress("404 no address");
+        test.setPhone("(555)444-3333");
+        
+        List<Super> org1Supers = new ArrayList();
+        
+//        E.V.I.L.
+        Super testSuper = new Super();
+        testSuper.setId(4);
+        testSuper.setName("Joseph Joestar");
+        testSuper.setDescription("...");
+        Super testSuper2 = new Super();
+        testSuper2.setId(5);
+        testSuper2.setName("Avdol");
+        testSuper2.setDescription("Just the hands left");
+        
+        List<Power> testPowers = new ArrayList();
+        Power testPower = new Power();
+        testPower.setId(4);
+        testPower.setName("Smack");
+        
+        testPowers.add(testPower);
+        testSuper.setAllPowers(testPowers);
+        testSuper2.setAllPowers(testPowers);
+        
+        org1Supers.add(testSuper);
+        org1Supers.add(testSuper2);
+        test.setAllSupers(org1Supers);
 
+        List<Super> org2Supers = new ArrayList();
         Organization test2 = new Organization();
         test2.setId(2);
-        test2.setOrgName("The Krusty Krab");
-        test2.setOrgDescription("My name is Mr. Krabs and I like money.");
-        test2.setAddress("1000 Rock Bottom Heights");
+        test2.setOrgName("more evil");
+        test2.setOrgDescription("more evil");
+        test2.setAddress("900 no address");
+        test2.setPhone("(111)444-3333");
+        testSuper.setAllPowers(testPowers);
+        org2Supers.add(testSuper);
+        test2.setAllSupers(org2Supers);
 
+        List<Super> org3Supers = new ArrayList();
         Organization test3 = new Organization();
         test3.setId(3);
-        test3.setOrgName("Hyrule");
-        test3.setOrgDescription("Your princess is in another castle lol.");
-        test3.setAddress("404 maybe in the hills?");
+        test3.setOrgName("gud");
+        test3.setOrgDescription("git gud");
+        test3.setAddress("9000 winners circle");
+        test3.setPhone("(612)444-3333");
+        testSuper2.setAllPowers(testPowers);
+        org3Supers.add(testSuper2);
+        test3.setAllSupers(org3Supers);
         
         allOrganizations.add(test);
         allOrganizations.add(test2);

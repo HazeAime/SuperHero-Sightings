@@ -30,15 +30,15 @@ public class InMemPowDao implements PowerRepository {
 
         Power test = new Power();
         test.setId(1);
-        test.setName("Flavor Town");
+        test.setName("ORAORAORAH");
 
         Power test2 = new Power();
         test2.setId(2);
-        test2.setName("The Krusty Krab");
+        test2.setName("ZA-WORLD-OHH");
 
         Power test3 = new Power();
         test3.setId(3);
-        test3.setName("Hyrule");
+        test3.setName("Flight");
 
         allPowers.add(test);
         allPowers.add(test2);

@@ -110,9 +110,9 @@ public class InMemSupDao implements SuperRepository {
     public Super getOne(Integer id) {
         Super toReturn = null;
 
-        for (Super Super : allSupers) {
-            if (Super.getId() == id) {
-                toReturn = Super;
+        for (Super superBeing : allSupers) {
+            if (superBeing.getId() == id) {
+                toReturn = superBeing;
             }
         }
         return toReturn;
@@ -121,9 +121,9 @@ public class InMemSupDao implements SuperRepository {
     @Override
     public <S extends Super> S save(S s) {
         boolean isCreate = true;
-        Optional<Super> originalLoc = findById(s.getId());
+        Optional<Super> originalSup = findById(s.getId());
 
-        if (!originalLoc.isEmpty()) {
+        if (!originalSup.isEmpty()) {
             isCreate = false;
         }
 
@@ -134,7 +134,7 @@ public class InMemSupDao implements SuperRepository {
         }
 
         if (!isCreate) {
-            Super toEdit = originalLoc.get();
+            Super toEdit = originalSup.get();
 
             toEdit.setId(s.getId());
             toEdit.setName(s.getName());

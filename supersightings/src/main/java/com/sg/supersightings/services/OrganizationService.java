@@ -10,6 +10,8 @@ import com.sg.supersightings.models.Organization;
 import com.sg.supersightings.models.OrganizationVM;
 import com.sg.supersightings.models.Super;
 import com.sg.supersightings.models.SuperVM;
+import com.sg.supersightings.repositories.InMemOrgDao;
+import com.sg.supersightings.repositories.InMemSupDao;
 import com.sg.supersightings.repositories.OrganizationRepository;
 import com.sg.supersightings.repositories.SuperRepository;
 import java.util.ArrayList;
@@ -29,6 +31,11 @@ public class OrganizationService {
 
     @Autowired
     SuperRepository superBeingRepo;
+
+    public OrganizationService(SuperRepository superBeingRepo, OrganizationRepository organizationRepo) {
+        this.superBeingRepo = superBeingRepo;
+        this.organizationRepo = organizationRepo;
+    }
 
     public Organization getOne(Integer id) {
         return organizationRepo.getOne(id);
@@ -52,7 +59,7 @@ public class OrganizationService {
         organizationRepo.save(toAdd);
     }
     
-    public void updateOrg(Organization org, OrganizationVM vm) throws InvalidEntityException {        
+    public void updateOrg(Organization org, OrganizationVM vm) throws InvalidEntityException {  
         org.setOrgName(vm.getOrgName());
         org.setOrgDescription(vm.getOrgDescription());
         org.setAddress(vm.getAddress());

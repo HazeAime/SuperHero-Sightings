@@ -48,8 +48,17 @@ public class SuperService {
     
     }
     
-    public SuperService(SuperRepository superBeingRepo) {
+    public SuperService(
+            SuperRepository superBeingRepo, 
+            PowerRepository powerRepo, 
+            OrganizationRepository organizationRepo,
+            SightingRepository sightingRepo,
+            LocationRepository locationRepo) {
         this.superBeingRepo = superBeingRepo;
+        this.powerRepo = powerRepo;
+        this.locationRepo = locationRepo;
+        this.organizationRepo = organizationRepo;
+        this.sightingRepo = sightingRepo;
     }
 
     public List<Super> findAll() {
@@ -63,6 +72,7 @@ public class SuperService {
     public void saveNewSuper(SuperVM vm) throws InvalidEntityException {
         Super toSave = new Super(vm);
         List<Power> allPowers = new ArrayList<>();
+        List<Organization> allOrgs = new ArrayList<>();
 
         for (Integer powerId : vm.getPowerIds()) {
             Power power = powerRepo.findById(powerId).orElse(null);
@@ -70,7 +80,15 @@ public class SuperService {
                 allPowers.add(power);
             }
         }
+        for (Integer orgId : vm.getOrgIds()) {
+            Organization org = organizationRepo.findById(orgId).orElse(null);
+            if (org != null) {
+                allOrgs.add(org);
+            }
+        }
+        toSave.setId(vm.getSuperId());
         toSave.setAllPowers(allPowers);
+        toSave.setAllOrganizations(allOrgs);
         validateSuper(toSave);
         superBeingRepo.save(toSave);
     }
@@ -116,8 +134,9 @@ public class SuperService {
             PowerVM vm = new PowerVM(power);
             if (superBeing.getAllPowers().contains(power)) {
                 vm.setIsChecked(true);
+                toReturn.add(vm);
             }
-            toReturn.add(vm);
+            
         }
 
         return toReturn;

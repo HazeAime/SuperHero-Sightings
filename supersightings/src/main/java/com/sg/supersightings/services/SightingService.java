@@ -38,6 +38,14 @@ public class SightingService {
     @Autowired
     LocationRepository locationRepo;
 
+    public SightingService() {}
+    
+    public SightingService(SightingRepository sightingRepo, SuperRepository superRepo, LocationRepository locationRepo) {
+        this.locationRepo = locationRepo;
+        this.sightingRepo = sightingRepo;
+        this.superBeingRepo = superRepo;
+    }
+    
     public Sighting getOne(Integer id) {
         return sightingRepo.getOne(id);
     }
