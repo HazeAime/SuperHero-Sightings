@@ -28,7 +28,6 @@ import static java.util.Comparator.comparing;
  *
  * @author siessejordan
  */
-@Component
 public class InMemSightDao implements SightingRepository {
 
     List<Sighting> allSightings = new ArrayList();

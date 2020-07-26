@@ -23,7 +23,6 @@ import org.springframework.stereotype.Component;
  *
  * @author siessejordan
  */
-@Component
 public class InMemOrgDao implements OrganizationRepository {
 
     List<Organization> allOrganizations = new ArrayList();

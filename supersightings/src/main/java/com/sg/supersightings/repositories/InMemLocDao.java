@@ -21,7 +21,6 @@ import org.springframework.stereotype.Component;
  *
  * @author siessejordan
  */
-@Component
 public class InMemLocDao implements LocationRepository {
 
     List<Location> allLocations = new ArrayList();

@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
  *
  * @author siessejordan
  */
-@Component
+
 public class InMemPowDao implements PowerRepository {
 
     List<Power> allPowers = new ArrayList();

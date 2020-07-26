@@ -22,7 +22,6 @@ import org.springframework.stereotype.Component;
  *
  * @author siessejordan
  */
-@Component
 public class InMemSupDao implements SuperRepository {
 
     List<Super> allSupers = new ArrayList();
